@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Runtime Permission Disclosure — LockLoom</title>
+  <meta name="description" content="Every runtime permission LockLoom requests, why it's needed, and what happens if you deny it. Full audit-grade transparency." />
+  <meta name="theme-color" content="#030303" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="https://lockloom-llc.github.io/LockLoom/assets/ic_launcher-playstore-512.png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/policy.css" />
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo" aria-label="LockLoom home">
+      <img src="https://lockloom-llc.github.io/LockLoom/assets/ic_launcher-playstore-512.png" alt="LockLoom" width="36" height="36" />
+      <span>LockLoom</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html#features">Features</a></li>
+      <li><a href="index.html#pricing">Pricing</a></li>
+      <li><a href="tiers.html">Tiers</a></li>
+      <li><a href="languages.html">Languages</a></li>
+      <li><a href="index.html#docs">Docs</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+    </ul>
+    <a href="https://play.google.com/store/search?q=lockloom&c=apps" class="nav__cta" target="_blank" rel="noopener">Get LockLoom</a>
+    <button class="nav__burger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="policy-hero">
+  <p class="section-tag">Disclosure</p>
+  <h1 class="section-title" style="margin-bottom:8px;">Runtime Permission Disclosure</h1>
+  <p style="color:var(--text-secondary);font-size:16px;">Every permission LockLoom requests &bull; Last updated: January 2026 (Build 347+)</p>
+</div>
+
+<!-- Content -->
+<div class="policy-content">
+
+  <div style="background:var(--accent-dim);border:1px solid rgba(0,212,170,.15);border-radius:var(--radius-md);padding:20px 24px;margin-bottom:40px;">
+    <strong style="color:var(--accent);">Not Networked to LockLoom Servers</strong>
+    <p style="margin-bottom:0;margin-top:8px;">"Network" classes (e.g., NetworkSosAlertDispatcher, NetworkSimSwapNotifier) are implemented as no-ops or pass-through to local droppers. Distress alerts go directly to user-configured emergency contacts — never through any LockLoom backend. Media capture pipelines delete temporary files after use. All logs use Logcat only and do not leave the device.</p>
+  </div>
+
+  <p>The following are normal app runtime permissions that may be requested by the OS. They are <strong>not</strong> DevicePolicyManager controls (see <a href="policies.html">Device Owner Policies</a> for those), but are listed here for audit completeness. All uses below are local-only and consistent with the zero-exfil posture.</p>
+
+  <h2>Runtime Permissions</h2>
+
+  <table>
+    <thead>
+      <tr><th>Permission</th><th>Purpose &amp; Data Handling</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>CAMERA</strong></td>
+        <td>Used for on-device photo/video capture triggered by local codeword actions or integrity workflows. Media is encrypted locally and deleted after processing; there is no upload path. A brief green dot appears per Android camera/mic policy.</td>
+      </tr>
+      <tr>
+        <td><strong>RECORD_AUDIO</strong></td>
+        <td>Used for on-device audio capture via MediaRecorder. Files are handled identically (local encryption, ephemeral storage, no network). A brief green dot appears per Android camera/mic policy.</td>
+      </tr>
+      <tr>
+        <td><strong>READ_PHONE_STATE</strong></td>
+        <td>Required for SIM-swap detection (reading SIM/telephony state). The app stores only a hash of identifiers inside app storage and performs comparisons locally. Also DO-granted at setup to ensure continuity.</td>
+      </tr>
+      <tr>
+        <td><strong>BLUETOOTH_CONNECT</strong> (Android 12+) or legacy BLUETOOTH / BLUETOOTH_ADMIN</td>
+        <td>Allows reading connection state of the user-paired "kill-switch" Bluetooth device. The app listens to connection broadcasts and queries connected profiles; no device data is uploaded.</td>
+      </tr>
+      <tr>
+        <td><strong>ACCESS_FINE_LOCATION / ACCESS_COARSE_LOCATION</strong></td>
+        <td>Used by the optional local SOS beacon to obtain a location fix. Location data is included in distress alerts sent directly to user-configured emergency contacts via SMS/email. No location data is sent to LockLoom servers. Requires Phone Data Consent before use.</td>
+      </tr>
+      <tr>
+        <td><strong>SEND_SMS</strong></td>
+        <td>Used to send SOS/distress alerts directly to emergency contacts via SMS. Messages are sent using Android's SmsManager API directly to phone numbers configured by the user. No data is sent to any backend or third-party service. Requires Phone Data Consent before phone numbers can be saved.</td>
+      </tr>
+      <tr>
+        <td><strong>INTERNET</strong></td>
+        <td>Required for OAuth authentication with Gmail API and SMTP email dispatch. Used only to send distress alerts directly to user-configured emergency contacts. No telemetry, analytics, or data is sent to LockLoom servers.</td>
+      </tr>
+      <tr>
+        <td><strong>POST_NOTIFICATIONS</strong> (Android 13+)</td>
+        <td>Required to present the persistent notification for the foreground service. If not granted, the service defers start until the user permits it.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>What Happens If You Deny a Permission</h2>
+  <table>
+    <thead>
+      <tr><th>Permission</th><th>Effect of Denial</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>CAMERA</td><td>Evidence capture disabled. Distress alerts will still be sent but without photo/video attachments.</td></tr>
+      <tr><td>RECORD_AUDIO</td><td>Audio capture disabled. Other evidence capture continues to function.</td></tr>
+      <tr><td>READ_PHONE_STATE</td><td>SIM-swap detection disabled. Other security features unaffected.</td></tr>
+      <tr><td>BLUETOOTH_CONNECT</td><td>Kill-switch defaults to "disconnected" state without crashing. Feature effectively disabled.</td></tr>
+      <tr><td>LOCATION</td><td>GPS coordinates excluded from distress alerts. Other alert content (message, evidence) still sent.</td></tr>
+      <tr><td>SEND_SMS</td><td>SMS distress alerts disabled. Email alerts (if configured) continue to work.</td></tr>
+      <tr><td>INTERNET</td><td>Gmail OAuth and SMTP email dispatch disabled. SMS alerts (if configured) continue to work.</td></tr>
+      <tr><td>POST_NOTIFICATIONS</td><td>Foreground service cannot start. Background monitoring deferred until permission granted.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Data Flow Summary</h2>
+  <p>All data flows follow the same pattern:</p>
+  <p style="text-align:center;font-size:18px;font-weight:700;color:var(--accent);margin:24px 0;">Your Device → Your Emergency Contacts</p>
+  <p>LockLoom LLC is not in this path. We do not relay, store, or have access to any data transmitted during distress events. All processing occurs exclusively on your device.</p>
+
+  <p style="margin-top:40px;padding-top:24px;border-top:1px solid var(--surface-border);color:var(--text-muted);font-size:13px;">&copy; 2025-2026 LockLoom LLC. All rights reserved.</p>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

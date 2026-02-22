@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Device Owner Policies — LockLoom</title>
+  <meta name="description" content="Full disclosure of all Device Owner capabilities LockLoom uses, when they activate, how to disable them, and the zero-exfil commitment." />
+  <meta name="theme-color" content="#030303" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="https://lockloom-llc.github.io/LockLoom/assets/ic_launcher-playstore-512.png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/policy.css" />
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo" aria-label="LockLoom home">
+      <img src="https://lockloom-llc.github.io/LockLoom/assets/ic_launcher-playstore-512.png" alt="LockLoom" width="36" height="36" />
+      <span>LockLoom</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html#features">Features</a></li>
+      <li><a href="index.html#pricing">Pricing</a></li>
+      <li><a href="tiers.html">Tiers</a></li>
+      <li><a href="languages.html">Languages</a></li>
+      <li><a href="index.html#docs">Docs</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+    </ul>
+    <a href="https://play.google.com/store/search?q=lockloom&c=apps" class="nav__cta" target="_blank" rel="noopener">Get LockLoom</a>
+    <button class="nav__burger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="policy-hero">
+  <p class="section-tag">Disclosure</p>
+  <h1 class="section-title" style="margin-bottom:8px;">Device Owner Policies</h1>
+  <p style="color:var(--text-secondary);font-size:16px;">Full disclosure of every Device Owner capability &bull; Last updated: January 2026 (Build 347+)</p>
+</div>
+
+<!-- Content -->
+<div class="policy-content">
+
+  <div style="background:var(--accent-dim);border:1px solid rgba(0,212,170,.15);border-radius:var(--radius-md);padding:20px 24px;margin-bottom:40px;">
+    <strong style="color:var(--accent);">Zero-Exfil Commitment</strong>
+    <p style="margin-bottom:0;margin-top:8px;">This device owner (DO) configuration is intentionally designed for zero data exfiltration. The app does not transmit photos, audio, video, telemetry, or identifiers to any backend. All "network" integrations in code are no-op delegates, and the control-plane base URL is disabled.</p>
+  </div>
+
+  <h2>What This Page Covers</h2>
+  <p>This disclosure enumerates every DevicePolicyManager capability the app uses as device owner, and explains why each is required. For runtime permissions (not device policies), see the <a href="permissions.html">Runtime Permission Disclosure</a>.</p>
+
+  <h2>Device Owner (DO) Policies Used</h2>
+
+  <table>
+    <thead>
+      <tr><th>Policy</th><th>Purpose &amp; Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>lockNow</strong> via DeviceLockController (DO)</td>
+        <td>Allows the app to immediately lock the device in response to policy violations (e.g., integrity attestation failure, kill-switch absence, session watchdog timeout). This is a local action; no data leaves the device.</td>
+      </tr>
+      <tr>
+        <td><strong>wipeDevice</strong> via ShutdownController (DO)</td>
+        <td>Enables factory reset escalation after repeated integrity failures or explicit policy triggers. Used only under well-defined thresholds; this is a device-local action with zero network use.</td>
+      </tr>
+      <tr>
+        <td><strong>setApplicationHidden</strong> (DO)</td>
+        <td>Supports the "Hidden Workspace": selected, already-protected apps can be hidden/unhidden on the device. Hiding affects launcher visibility only; it does not uninstall or export data.</td>
+      </tr>
+      <tr>
+        <td><strong>USB guard:</strong> setUsbDataSignalingEnabled (Android 14/15+, DO) or legacy addUserRestriction(DISALLOW_USB_FILE_TRANSFER) (Android 7+)</td>
+        <td>When the paired "kill-switch" device (e.g., Bluetooth tag) is absent and policy requires presence, the manager disables USB data signaling (or applies the legacy user restriction) to reduce exfil/ingress risk through USB. Automatically cleared when the device reconnects or policy no longer requires it.</td>
+      </tr>
+      <tr>
+        <td><strong>forceStopPackage</strong> (Android 7.0+, DO-only)</td>
+        <td>As part of local "stream termination," the DO can request specific protected apps to be force-stopped. If unavailable on the platform or not permitted, the code falls back to killing background processes. This is entirely local and does not export data.</td>
+      </tr>
+      <tr>
+        <td><strong>DO-granted runtime permission:</strong> READ_PHONE_STATE</td>
+        <td>During setup, the DO auto-grants READ_PHONE_STATE to enable SIM-swap detection. The feature computes a local hash of SIM identifiers and compares it on-device; notifications are local only.</td>
+      </tr>
+      <tr>
+        <td><strong>Foreground service</strong> (system-visible notification)</td>
+        <td>The app runs a persistent foreground service (with a user-visible notification) to host local monitors (integrity, kill-switch, SOS scheduler). Starting this service is guarded by POST_NOTIFICATIONS on Android 13+; no data transmission occurs.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Implementation notes:</strong></p>
+  <ul>
+    <li>Network loggers/dispatchers (media capture, shutdown, SOS, SIM-swap) are backed by no-op delegates.</li>
+    <li>All capture files (photo/audio/video) are stored in app cache, encrypted locally for processing, then deleted. No upload endpoints are configured.</li>
+    <li>Control plane endpoints are initialized as disabled; telemetry queue is cleared on startup.</li>
+  </ul>
+
+  <h2>Accessibility Service</h2>
+  <p>The app offers an optional AccessibilityService to intercept launches of selected protected apps and gate them behind authentication. Enabling it requires explicit user action in system settings and an in-app consent record. The service observes window state changes only to identify the foreground package; it does not transmit events off-device.</p>
+  <p>The AccessibilityService also enables distress PIN detection on the lock screen, allowing covert SOS triggers without visible indicators. This capability requires both Accessibility Consent and Phone Data Consent before activation.</p>
+
+  <h2>Google Play User Data Policy Compliance</h2>
+  <p>LockLoom implements two separate in-app consent disclosures for sensitive data access, each complying with <a href="https://support.google.com/googleplay/android-developer/answer/10144311" target="_blank" rel="noopener">Google Play's User Data Policy</a>. Consent is immutably recorded with timestamps and functionality is gated until consent is granted.</p>
+
+  <h3>1. Accessibility Service Consent</h3>
+  <p><strong>What data is accessed:</strong> LockLoom's optional AccessibilityService monitors app launch events (window state changes) to pause or hide protected apps until authentication succeeds, log policy bypass attempts for local security telemetry, and detect distress PIN entry on the system lock screen for covert SOS triggers. Data stays on-device.</p>
+
+  <table>
+    <thead>
+      <tr><th>Consent Property</th><th>Implementation</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Disclosure Location</td><td>Dedicated "Launch Monitoring Disclosure" screen shown during normal app usage</td></tr>
+      <tr><td>Consent Mechanism</td><td>Checkbox ("I understand and consent...") + "Continue to Android settings" button</td></tr>
+      <tr><td>Persistence</td><td>Consent timestamp immutably recorded in device-protected storage (SharedPreferences)</td></tr>
+      <tr><td>Feature Gating</td><td>AccessibilityService cannot be enabled until consent is recorded; distress PIN setup is blocked without accessibility consent</td></tr>
+    </tbody>
+  </table>
+
+  <h3>2. Phone Number Data Consent</h3>
+  <p><strong>What data is collected:</strong> Phone numbers you enter as emergency contacts (stored locally only), SMS messages sent directly to these contacts when you trigger a distress PIN, your device's phone number (may be included in alerts), and GPS location (if available). Alerts are sent directly to your configured emergency contacts via SMS/email — never through any LockLoom server.</p>
+
+  <p><strong>A. Phone Data Disclosure Dialog (Build 313+):</strong> Modal dialog shown when user attempts to save phone numbers. Checkbox + "I Agree" button. Modal cannot be dismissed without explicit action (dismissOnBackPress=false, dismissOnClickOutside=false).</p>
+
+  <p><strong>B. Distress PIN Data Sharing Consent (Build 347+):</strong> Inline card displayed directly above distress PIN entry fields. Separate consent timestamp recorded with date display. Distress PIN cannot be set until BOTH accessibility consent AND data sharing consent are granted.</p>
+
+  <h2>Consent Architecture Summary</h2>
+  <table>
+    <thead>
+      <tr><th>Feature</th><th>Requires</th><th>Storage</th><th>Gating</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Accessibility Service</td><td>Accessibility Consent only</td><td>Device-protected SharedPreferences</td><td>Service cannot be enabled until consent recorded</td></tr>
+      <tr><td>Save Emergency Phone Numbers</td><td>Phone Data Consent</td><td>PhoneDataConsentStore (device-protected)</td><td>Save button triggers consent dialog if not already granted</td></tr>
+      <tr><td>Set Distress PIN</td><td>BOTH Accessibility + Data Sharing Consent</td><td>Separate timestamps for each</td><td>Submit button blocked with toast explaining which consent(s) missing</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Immutability:</strong> All consent timestamps are written to device-protected storage. Once recorded, consent cannot be retroactively modified — only revoked by the user through explicit action. Consent version tracking ensures users must re-consent if disclosure text changes materially.</p>
+
+  <h2>Security Hardening — Runtime Protection</h2>
+  <table>
+    <thead>
+      <tr><th>Measure</th><th>Details</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>FLAG_SECURE on security activities</td>
+        <td>All security-critical activities apply FLAG_SECURE to prevent screenshots, screen recording, and display on non-secure displays. Protects authentication screens from capture.</td>
+      </tr>
+      <tr>
+        <td>Clipboard auto-clear</td>
+        <td>ClipboardSecurityManager automatically clears the system clipboard when leaving security activities, preventing sensitive data from persisting in clipboard history.</td>
+      </tr>
+      <tr>
+        <td>Backup prevention</td>
+        <td>Android Auto Backup excludes ALL data domains. For Android 12+, data_extraction_rules.xml additionally blocks cloud backup and device-to-device transfer, preventing forensic extraction via ADB backup.</td>
+      </tr>
+      <tr>
+        <td>Runtime integrity detection</td>
+        <td>On-device checks for Frida/Xposed hooking, root indicators (su, Magisk), native hooks (LD_PRELOAD), debug/emulator environments. Constant-time comparison prevents timing attacks. No data transmitted.</td>
+      </tr>
+      <tr>
+        <td>Play Integrity attestation</td>
+        <td>Uses Google Play Integrity API for device attestation. Verdict evaluated locally. Cryptographic nonces prevent replay attacks. Nonce and verdict remain on-device.</td>
+      </tr>
+      <tr>
+        <td>Memory obfuscation</td>
+        <td>Security-sensitive strings are Base64-encoded and decoded only at runtime. Combined with ProGuard obfuscation, this prevents static analysis from identifying security logic.</td>
+      </tr>
+      <tr>
+        <td>MFA session hardening</td>
+        <td>MFA session tokens encrypted with AES-GCM and validated via HMAC. Keys stored in Android Keystore with HSM backing when available. Sessions bound to device.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Data Handling &amp; Retention</h2>
+  <h3>Local-only Processing</h3>
+  <ul>
+    <li>Photos, audio, and video are captured to app cache, encrypted with a device-specific key, and then deleted.</li>
+    <li>SIM-swap uses a local hash of SIM info; the previous/current hash lives in app/private storage.</li>
+    <li>Accessibility events are observed transiently to gate app launches; they are not exported.</li>
+  </ul>
+
+  <h3>No Control Plane</h3>
+  <ul>
+    <li>ControlPlaneEndpoints are initialized in a disabled state.</li>
+    <li>On startup, the telemetry queue is cleared.</li>
+    <li>All "remote logger/dispatcher" interfaces resolve to no-op implementations.</li>
+  </ul>
+
+  <h2>Platform Guardrails &amp; Version Notes</h2>
+  <ul>
+    <li>USB guarding prefers <code>setUsbDataSignalingEnabled</code> on Android 14/15+ and falls back to <code>DISALLOW_USB_FILE_TRANSFER</code> on Android 7+.</li>
+    <li><code>forceStopPackage</code> is invoked only on Android 7.0+ when available to a DO.</li>
+    <li>Bluetooth monitoring honors <code>BLUETOOTH_CONNECT</code> (12+) or legacy permissions; if missing, the system defaults to "disconnected" without crashing.</li>
+    <li>Foreground service types are set appropriately across OS versions; the service will not start without user notification consent on 13+.</li>
+  </ul>
+
+  <h2>Summary</h2>
+  <p>The DO configuration above reflects exactly what the app enforces on-device and does not add any networked behaviors to LockLoom servers. All sensitive operations (lock, wipe, hide apps, USB guard, force-stop) are strictly local. Distress alerts go directly to user-configured emergency contacts via SMS and email — never through any backend.</p>
+  <p>User consent is paramount: Both Accessibility Service usage and Phone Number data collection require explicit in-app consent with immutable timestamp recording. Features are gated until consent is granted, ensuring compliance with Google Play's User Data Policy.</p>
+
+  <p style="margin-top:40px;padding-top:24px;border-top:1px solid var(--surface-border);color:var(--text-muted);font-size:13px;">&copy; 2025-2026 LockLoom LLC. All rights reserved.</p>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

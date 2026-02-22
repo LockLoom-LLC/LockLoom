@@ -44,41 +44,10 @@
       margin-top: 4px;
     }
 
-    .tier-section { margin-bottom: 48px; }
-    .tier-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 20px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--surface-border);
-    }
-    .tier-badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 4px 12px;
-      border-radius: 100px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .5px;
-    }
-    .tier-badge--high { background: rgba(0,212,170,.12); color: var(--accent); }
-    .tier-badge--mid  { background: rgba(245,158,11,.12); color: #F59E0B; }
-    .tier-badge--low  { background: rgba(239,68,68,.12); color: #EF4444; }
-
-    .tier-header h2 {
-      font-size: 20px;
-      font-weight: 700;
-    }
-    .tier-header span.count {
-      color: var(--text-tertiary);
-      font-size: 14px;
-      font-weight: 400;
-    }
 
     .locale-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
       gap: 10px;
     }
     .locale-row {
@@ -101,9 +70,6 @@
     .locale-row__name {
       font-size: 14px;
       font-weight: 600;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
     .locale-row__code {
       font-size: 11px;
@@ -209,7 +175,7 @@
       <li><a href="languages.html" style="color:var(--text-primary)">Languages</a></li>
       <li><a href="privacy.html">Privacy</a></li>
     </ul>
-    <a href="index.html#pricing" class="nav__cta">Get LockLoom</a>
+    <a href="https://play.google.com/store/search?q=lockloom&c=apps" class="nav__cta" target="_blank" rel="noopener">Get LockLoom</a>
     <button class="nav__burger" aria-label="Toggle menu">
       <span></span><span></span><span></span>
     </button>
@@ -259,13 +225,7 @@
 
   <div id="localeContainer">
 
-  <!-- ═══════ Tier 1: 93.4% — 126 Locales ═══════ -->
-  <div class="tier-section fade-in">
-    <div class="tier-header">
-      <span class="tier-badge tier-badge--high">93.4%</span>
-      <h2>Near-Complete <span class="count">— 126 locales</span></h2>
-    </div>
-    <div class="locale-grid">
+    <div class="locale-grid fade-in">
       <div class="locale-row" data-lang="afrikaans af"><div class="locale-row__info"><div class="locale-row__name">Afrikaans</div><div class="locale-row__code">af</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
       <div class="locale-row" data-lang="amharic am"><div class="locale-row__info"><div class="locale-row__name">Amharic — አማርኛ</div><div class="locale-row__code">am</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
       <div class="locale-row" data-lang="amharic ethiopia am-ret"><div class="locale-row__info"><div class="locale-row__name">Amharic (Ethiopia) — አማርኛ</div><div class="locale-row__code">am-rET</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
@@ -393,42 +353,15 @@
       <div class="locale-row" data-lang="zulu zu"><div class="locale-row__info"><div class="locale-row__name">Zulu</div><div class="locale-row__code">zu</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
       <div class="locale-row" data-lang="croatian croatia hr-rhr"><div class="locale-row__info"><div class="locale-row__name">Croatian (Croatia)</div><div class="locale-row__code">hr-rHR</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
       <div class="locale-row" data-lang="armenian hy"><div class="locale-row__info"><div class="locale-row__name">Armenian — Հայերեն</div><div class="locale-row__code">hy</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
-    </div>
-  </div>
 
-  <!-- ═══════ Tier 2: 93.3% — 1 Locale ═══════ -->
-  <div class="tier-section fade-in">
-    <div class="tier-header">
-      <span class="tier-badge tier-badge--high">93.3%</span>
-      <h2>Slightly Lower <span class="count">— 1 locale</span></h2>
-    </div>
-    <div class="locale-grid">
       <div class="locale-row" data-lang="italian it italiano"><div class="locale-row__info"><div class="locale-row__name">Italian — Italiano</div><div class="locale-row__code">it</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.3%"></div></div><div class="locale-row__pct pct--high">93.3%</div></div>
-    </div>
-  </div>
 
-  <!-- ═══════ Tier 3: 91.0% — 5 Locales ═══════ -->
-  <div class="tier-section fade-in">
-    <div class="tier-header">
-      <span class="tier-badge tier-badge--high">91.0%</span>
-      <h2>Nordic / Slavic <span class="count">— 5 locales</span></h2>
-    </div>
-    <div class="locale-grid">
       <div class="locale-row" data-lang="danish da dansk"><div class="locale-row__info"><div class="locale-row__name">Danish — Dansk</div><div class="locale-row__code">da</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:91%"></div></div><div class="locale-row__pct pct--high">91.0%</div></div>
       <div class="locale-row" data-lang="finnish fi suomi"><div class="locale-row__info"><div class="locale-row__name">Finnish — Suomi</div><div class="locale-row__code">fi</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:91%"></div></div><div class="locale-row__pct pct--high">91.0%</div></div>
       <div class="locale-row" data-lang="norwegian bokmål nb"><div class="locale-row__info"><div class="locale-row__name">Norwegian Bokmål</div><div class="locale-row__code">nb</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:91%"></div></div><div class="locale-row__pct pct--high">91.0%</div></div>
       <div class="locale-row" data-lang="slovak sk slovenčina"><div class="locale-row__info"><div class="locale-row__name">Slovak — Slovenčina</div><div class="locale-row__code">sk</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:91%"></div></div><div class="locale-row__pct pct--high">91.0%</div></div>
       <div class="locale-row" data-lang="swedish sv svenska"><div class="locale-row__info"><div class="locale-row__name">Swedish — Svenska</div><div class="locale-row__code">sv</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:91%"></div></div><div class="locale-row__pct pct--high">91.0%</div></div>
-    </div>
-  </div>
 
-  <!-- ═══════ Tier 4: 80.4% — 7 Locales ═══════ -->
-  <div class="tier-section fade-in">
-    <div class="tier-header">
-      <span class="tier-badge tier-badge--mid">80.4%</span>
-      <h2>Regional Variants <span class="count">— 7 locales</span></h2>
-    </div>
-    <div class="locale-grid">
       <div class="locale-row" data-lang="catalan ca català"><div class="locale-row__info"><div class="locale-row__name">Catalan — Català</div><div class="locale-row__code">ca</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--mid" style="width:80.4%"></div></div><div class="locale-row__pct pct--mid">80.4%</div></div>
       <div class="locale-row" data-lang="german austria de-rat"><div class="locale-row__info"><div class="locale-row__name">German (Austria)</div><div class="locale-row__code">de-rAT</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--mid" style="width:80.4%"></div></div><div class="locale-row__pct pct--mid">80.4%</div></div>
       <div class="locale-row" data-lang="german switzerland de-rch"><div class="locale-row__info"><div class="locale-row__name">German (Switzerland)</div><div class="locale-row__code">de-rCH</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--mid" style="width:80.4%"></div></div><div class="locale-row__pct pct--mid">80.4%</div></div>
@@ -436,22 +369,12 @@
       <div class="locale-row" data-lang="swiss german gsw"><div class="locale-row__info"><div class="locale-row__name">Swiss German</div><div class="locale-row__code">gsw</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--mid" style="width:80.4%"></div></div><div class="locale-row__pct pct--mid">80.4%</div></div>
       <div class="locale-row" data-lang="croatian hr hrvatski"><div class="locale-row__info"><div class="locale-row__name">Croatian — Hrvatski</div><div class="locale-row__code">hr</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--mid" style="width:80.4%"></div></div><div class="locale-row__pct pct--mid">80.4%</div></div>
       <div class="locale-row" data-lang="dutch belgium nl-rbe"><div class="locale-row__info"><div class="locale-row__name">Dutch (Belgium)</div><div class="locale-row__code">nl-rBE</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--mid" style="width:80.4%"></div></div><div class="locale-row__pct pct--mid">80.4%</div></div>
-    </div>
-  </div>
 
-  <!-- ═══════ Tier 5: 3.0% — 4 Indigenous Languages ═══════ -->
-  <div class="tier-section fade-in">
-    <div class="tier-header">
-      <span class="tier-badge tier-badge--low">3.0%</span>
-      <h2>Indigenous Languages <span class="count">— 4 locales &mdash; need full translation</span></h2>
-    </div>
-    <div class="locale-grid">
       <div class="locale-row" data-lang="kiowa apache b+apw"><div class="locale-row__info"><div class="locale-row__name">Kiowa Apache</div><div class="locale-row__code">b+apw</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--low" style="width:3%"></div></div><div class="locale-row__pct pct--low">3.0%</div></div>
       <div class="locale-row" data-lang="choctaw b+cho"><div class="locale-row__info"><div class="locale-row__name">Choctaw</div><div class="locale-row__code">b+cho</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--low" style="width:3%"></div></div><div class="locale-row__pct pct--low">3.0%</div></div>
       <div class="locale-row" data-lang="eastern keres b+kee"><div class="locale-row__info"><div class="locale-row__name">Eastern Keres</div><div class="locale-row__code">b+kee</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--low" style="width:3%"></div></div><div class="locale-row__pct pct--low">3.0%</div></div>
       <div class="locale-row" data-lang="zuni b+zun"><div class="locale-row__info"><div class="locale-row__name">Zuni</div><div class="locale-row__code">b+zun</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--low" style="width:3%"></div></div><div class="locale-row__pct pct--low">3.0%</div></div>
     </div>
-  </div>
 
   </div><!-- /localeContainer -->
 
@@ -472,11 +395,7 @@ if (search) {
       const name = row.querySelector('.locale-row__name')?.textContent.toLowerCase() || '';
       row.style.display = (data.includes(q) || name.includes(q)) ? '' : 'none';
     });
-    // Hide empty tiers
-    document.querySelectorAll('.tier-section').forEach(tier => {
-      const visible = tier.querySelectorAll('.locale-row:not([style*="display: none"])');
-      tier.style.display = visible.length ? '' : 'none';
-    });
+
   });
 }
 </script>

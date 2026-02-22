@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — LockLoom</title>
+  <meta name="description" content="LockLoom Privacy Policy. Zero data collection. Zero tracking. Zero backend. Read exactly what LockLoom does and doesn't collect." />
+  <meta name="theme-color" content="#030303" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="https://lockloom-llc.github.io/LockLoom/assets/ic_launcher-playstore-512.png" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/policy.css" />
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav" role="navigation">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <img src="https://lockloom-llc.github.io/LockLoom/assets/ic_launcher-playstore-512.png" alt="LockLoom" width="36" height="36" />
+      <span>LockLoom</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html#features">Features</a></li>
+      <li><a href="index.html#pricing">Pricing</a></li>
+      <li><a href="index.html#docs">Docs</a></li>
+      <li><a href="privacy.html" style="color:var(--text-primary)">Privacy</a></li>
+    </ul>
+    <a href="index.html#pricing" class="nav__cta">Get LockLoom</a>
+    <button class="nav__burger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="policy-hero">
+  <p class="section-tag">Legal</p>
+  <h1 class="section-title" style="margin-bottom:8px;">Privacy Policy</h1>
+  <p style="color:var(--text-secondary);font-size:16px;">Last updated: February 2026</p>
+</div>
+
+<!-- Content -->
+<div class="policy-content">
+
+  <p class="updated">Effective Date: February 21, 2026 &mdash; LockLoom version 1.5.x+</p>
+
+  <h2>Summary</h2>
+  <p><strong>LockLoom collects no data. Period.</strong></p>
+  <p>No personal information, no usage analytics, no crash reports, no telemetry, no advertising identifiers, and no device fingerprints are collected, transmitted, or stored by LockLoom or LockLoom LLC. We have no servers. We have no accounts. We have no backend infrastructure.</p>
+
+  <h2>1. Information We Collect</h2>
+  <p><strong>None.</strong></p>
+  <p>LockLoom operates on a zero-backend architecture. All data processing occurs exclusively on your device. Specifically:</p>
+  <ul>
+    <li>We do not collect personal information (name, email, phone number)</li>
+    <li>We do not collect device identifiers (IMEI, advertising ID, hardware serial)</li>
+    <li>We do not collect usage analytics or behavioral data</li>
+    <li>We do not collect crash reports or diagnostic data</li>
+    <li>We do not collect location data</li>
+    <li>We do not use cookies, tracking pixels, or web beacons</li>
+    <li>We do not maintain user accounts or profiles</li>
+  </ul>
+
+  <h2>2. Information Stored on Your Device</h2>
+  <p>LockLoom stores the following information <strong>exclusively on your device</strong> in encrypted local storage. This data never leaves your device to our servers (because we have no servers):</p>
+
+  <table>
+    <thead>
+      <tr><th>Data Type</th><th>Purpose</th><th>Storage</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>App protection policies</td><td>Per-app security configuration</td><td>Device-encrypted SharedPreferences</td></tr>
+      <tr><td>Biometric enrollment status</td><td>MFA authentication chain</td><td>Android Keystore</td></tr>
+      <tr><td>Emergency contact numbers</td><td>Distress SOS dispatch</td><td>Encrypted local database</td></tr>
+      <tr><td>Distress PIN / codewords</td><td>Covert SOS triggering</td><td>Salted hash (no plaintext)</td></tr>
+      <tr><td>Cloak icon selection</td><td>App disguise preference</td><td>SharedPreferences</td></tr>
+      <tr><td>Network cloak settings</td><td>Radio toggle preferences</td><td>Device-encrypted storage</td></tr>
+      <tr><td>Vault contents</td><td>User's encrypted files</td><td>ML-KEM-1024 / XChaCha20</td></tr>
+    </tbody>
+  </table>
+
+  <h2>3. Distress Alerts &amp; Data Flow</h2>
+  <p>When a distress code is triggered, LockLoom sends alerts <strong>directly from your device to your configured emergency contacts</strong>. The data flow is:</p>
+  <p><strong>Your Device → Your Emergency Contacts</strong></p>
+  <p>LockLoom LLC is not involved in this transmission. We do not see, store, relay, or have access to:</p>
+  <ul>
+    <li>Your emergency contacts' phone numbers or email addresses</li>
+    <li>Your GPS coordinates or location data</li>
+    <li>Photos, audio, or video captured during a distress event</li>
+    <li>The content of any SOS message</li>
+    <li>Whether a distress event occurred</li>
+  </ul>
+
+  <h2>4. Third-Party Services</h2>
+  <h3>Google Play Billing</h3>
+  <p>Your one-time purchase is processed by Google Play. Google's privacy policy governs this transaction. LockLoom receives only a purchase verification token — we do not receive your payment details, Google account email, or any personal information from Google.</p>
+
+  <h3>Gmail API (Optional)</h3>
+  <p>If you choose to use Gmail for distress email dispatch, you authenticate directly with Google via OAuth2. LockLoom receives a scoped access token stored only on your device. We never see your Gmail credentials, email content, or contact list.</p>
+
+  <h2>5. Data Sharing</h2>
+  <p><strong>We cannot share what we do not have.</strong></p>
+  <p>LockLoom LLC does not share, sell, rent, or disclose any user data to any third party — because we possess no user data. This includes:</p>
+  <ul>
+    <li>No data shared with advertisers</li>
+    <li>No data shared with analytics providers</li>
+    <li>No data shared with law enforcement (we have nothing to provide)</li>
+    <li>No data shared with affiliated companies</li>
+    <li>No data shared with government agencies</li>
+  </ul>
+
+  <h2>6. Law Enforcement Requests</h2>
+  <p>If we receive a lawful request for user data, our response is simple: <strong>we have no user data to provide.</strong> Our zero-backend architecture means we genuinely cannot comply with data production requests because the data does not exist on our infrastructure.</p>
+
+  <h2>7. Children's Privacy</h2>
+  <p>LockLoom is a security application designed for adults. We do not knowingly market to or collect information from children under 13. Since we collect no data from any user of any age, there is no children's data to protect — but we want to be explicit about our intended audience.</p>
+
+  <h2>8. Data Retention</h2>
+  <p><strong>Zero days.</strong> We retain no user data because we collect no user data. If you uninstall LockLoom, all locally-stored configuration is removed with the app.</p>
+
+  <h2>9. Your Rights</h2>
+  <p>Under GDPR, CCPA, and similar privacy regulations, you have the right to access, correct, delete, and port your data. Since we hold no data about you, these rights are automatically satisfied. There is nothing to access, correct, delete, or port.</p>
+
+  <h2>10. Changes to This Policy</h2>
+  <p>If we update this privacy policy, the changes will be posted on this page with an updated effective date. Our core commitment — zero data collection — will never change. If we ever need to collect data (we don't anticipate this), we will obtain explicit consent first.</p>
+
+  <h2>11. Contact</h2>
+  <p>If you have questions about this privacy policy or LockLoom's data practices:</p>
+  <ul>
+    <li>GitHub: <a href="https://github.com/LockLoom-LLC/LockLoom" target="_blank" rel="noopener">github.com/LockLoom-LLC/LockLoom</a></li>
+    <li>Website: <a href="https://lockloom.app">lockloom.app</a></li>
+  </ul>
+
+  <p style="margin-top:40px;padding-top:24px;border-top:1px solid var(--surface-border);color:var(--text-muted);font-size:13px;">&copy; 2025-2026 LockLoom LLC. All rights reserved.</p>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

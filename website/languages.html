@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>144 Supported Languages — LockLoom</title>
+  <meta name="description" content="LockLoom supports 144 locales with native script display. See translation completion status for every language." />
+  <meta name="theme-color" content="#030303" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="https://lockloom-llc.github.io/LockLoom/assets/ic_launcher-playstore-512.png" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/policy.css" />
+  <style>
+    /* ── Languages Page ────────────────────────────── */
+    .lang-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      max-width: 800px;
+      margin: 0 auto 48px;
+    }
+    .lang-stat {
+      background: var(--surface-primary);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      text-align: center;
+    }
+    .lang-stat__value {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: -1px;
+    }
+    .lang-stat__label {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+
+    .tier-section { margin-bottom: 48px; }
+    .tier-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--surface-border);
+    }
+    .tier-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .5px;
+    }
+    .tier-badge--high { background: rgba(0,212,170,.12); color: var(--accent); }
+    .tier-badge--mid  { background: rgba(245,158,11,.12); color: #F59E0B; }
+    .tier-badge--low  { background: rgba(239,68,68,.12); color: #EF4444; }
+
+    .tier-header h2 {
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .tier-header span.count {
+      color: var(--text-tertiary);
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    .locale-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 10px;
+    }
+    .locale-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--surface-primary);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      transition: border-color .2s;
+    }
+    .locale-row:hover {
+      border-color: rgba(0,212,170,.2);
+    }
+    .locale-row__info {
+      flex: 1;
+      min-width: 0;
+    }
+    .locale-row__name {
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .locale-row__code {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-family: 'SF Mono', 'Cascadia Code', 'Fira Code', monospace;
+    }
+    .locale-row__bar {
+      width: 80px;
+      height: 6px;
+      background: var(--surface-hover);
+      border-radius: 3px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .locale-row__fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width .4s ease;
+    }
+    .fill--high { background: var(--accent); }
+    .fill--mid  { background: #F59E0B; }
+    .fill--low  { background: #EF4444; }
+
+    .locale-row__pct {
+      font-size: 13px;
+      font-weight: 700;
+      width: 48px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .pct--high { color: var(--accent); }
+    .pct--mid  { color: #F59E0B; }
+    .pct--low  { color: #EF4444; }
+
+    .legend {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+    .legend span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .legend__dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .search-wrap {
+      max-width: 400px;
+      margin: 0 auto 32px;
+      position: relative;
+    }
+    .search-wrap input {
+      width: 100%;
+      background: var(--surface-primary);
+      border: 1px solid var(--surface-border);
+      border-radius: 100px;
+      padding: 12px 20px 12px 44px;
+      font-family: var(--font);
+      font-size: 14px;
+      color: var(--text-primary);
+      outline: none;
+      transition: border-color .2s;
+    }
+    .search-wrap input::placeholder { color: var(--text-muted); }
+    .search-wrap input:focus { border-color: var(--accent); }
+    .search-wrap svg {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 600px) {
+      .locale-grid { grid-template-columns: 1fr; }
+      .lang-stats { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav" role="navigation">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <img src="https://lockloom-llc.github.io/LockLoom/assets/ic_launcher-playstore-512.png" alt="LockLoom" width="36" height="36" />
+      <span>LockLoom</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html#features">Features</a></li>
+      <li><a href="index.html#pricing">Pricing</a></li>
+      <li><a href="index.html#docs">Docs</a></li>
+      <li><a href="languages.html" style="color:var(--text-primary)">Languages</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+    </ul>
+    <a href="index.html#pricing" class="nav__cta">Get LockLoom</a>
+    <button class="nav__burger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="policy-hero">
+  <p class="section-tag">🌍 Internationalization</p>
+  <h1 class="section-title" style="margin-bottom:8px;">144 Supported Languages</h1>
+  <p style="color:var(--text-secondary);font-size:16px;">Native script display &bull; 1,094 strings per locale &bull; Updated Build 422</p>
+</div>
+
+<!-- Stats -->
+<div class="container">
+  <div class="lang-stats fade-in">
+    <div class="lang-stat">
+      <div class="lang-stat__value">144</div>
+      <div class="lang-stat__label">Total Locales</div>
+    </div>
+    <div class="lang-stat">
+      <div class="lang-stat__value">1,094</div>
+      <div class="lang-stat__label">Strings per Locale</div>
+    </div>
+    <div class="lang-stat">
+      <div class="lang-stat__value">140</div>
+      <div class="lang-stat__label">Above 75%</div>
+    </div>
+    <div class="lang-stat">
+      <div class="lang-stat__value">13,942</div>
+      <div class="lang-stat__label">Pending Strings</div>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend fade-in">
+    <span><span class="legend__dot" style="background:var(--accent)"></span> 90%+ Coverage</span>
+    <span><span class="legend__dot" style="background:#F59E0B"></span> 75–89% Coverage</span>
+    <span><span class="legend__dot" style="background:#EF4444"></span> Below 25%</span>
+  </div>
+
+  <!-- Search -->
+  <div class="search-wrap fade-in">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" id="langSearch" placeholder="Search languages..." autocomplete="off" />
+  </div>
+
+  <div id="localeContainer">
+
+  <!-- ═══════ Tier 1: 93.4% — 126 Locales ═══════ -->
+  <div class="tier-section fade-in">
+    <div class="tier-header">
+      <span class="tier-badge tier-badge--high">93.4%</span>
+      <h2>Near-Complete <span class="count">— 126 locales</span></h2>
+    </div>
+    <div class="locale-grid">
+      <div class="locale-row" data-lang="afrikaans af"><div class="locale-row__info"><div class="locale-row__name">Afrikaans</div><div class="locale-row__code">af</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="amharic am"><div class="locale-row__info"><div class="locale-row__name">Amharic — አማርኛ</div><div class="locale-row__code">am</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="amharic ethiopia am-ret"><div class="locale-row__info"><div class="locale-row__name">Amharic (Ethiopia) — አማርኛ</div><div class="locale-row__code">am-rET</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="arabic ar العربية"><div class="locale-row__info"><div class="locale-row__name">Arabic — العربية</div><div class="locale-row__code">ar</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="arabic egypt ar-reg"><div class="locale-row__info"><div class="locale-row__name">Arabic (Egypt) — العربية</div><div class="locale-row__code">ar-rEG</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="assamese as অসমীয়া"><div class="locale-row__info"><div class="locale-row__name">Assamese — অসমীয়া</div><div class="locale-row__code">as</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="azerbaijani az"><div class="locale-row__info"><div class="locale-row__name">Azerbaijani</div><div class="locale-row__code">az</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="basque eu"><div class="locale-row__info"><div class="locale-row__name">Basque</div><div class="locale-row__code">eu</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="bengali bn বাংলা"><div class="locale-row__info"><div class="locale-row__name">Bengali — বাংলা</div><div class="locale-row__code">bn</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="bosnian bs"><div class="locale-row__info"><div class="locale-row__name">Bosnian</div><div class="locale-row__code">bs</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="bulgarian bg"><div class="locale-row__info"><div class="locale-row__name">Bulgarian — Български</div><div class="locale-row__code">bg</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="burmese my"><div class="locale-row__info"><div class="locale-row__name">Burmese — မြန်မာ</div><div class="locale-row__code">my</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="cebuano ceb"><div class="locale-row__info"><div class="locale-row__name">Cebuano</div><div class="locale-row__code">ceb</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="central alaskan yupik b+esu"><div class="locale-row__info"><div class="locale-row__name">Central Alaskan Yupik</div><div class="locale-row__code">b+esu</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="cherokee b+chr ᏣᎳᎩ"><div class="locale-row__info"><div class="locale-row__name">Cherokee — ᏣᎳᎩ</div><div class="locale-row__code">b+chr</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="chichewa ny"><div class="locale-row__info"><div class="locale-row__name">Chichewa</div><div class="locale-row__code">ny</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="chinese zh 中文"><div class="locale-row__info"><div class="locale-row__name">Chinese — 中文</div><div class="locale-row__code">zh</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="chinese simplified zh-rcn 简体中文"><div class="locale-row__info"><div class="locale-row__name">Chinese (Simplified) — 简体中文</div><div class="locale-row__code">zh-rCN</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="chinese hong kong zh-rhk 繁體中文"><div class="locale-row__info"><div class="locale-row__name">Chinese (Hong Kong) — 繁體中文</div><div class="locale-row__code">zh-rHK</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="chinese traditional zh-rtw 繁體中文"><div class="locale-row__info"><div class="locale-row__name">Chinese (Traditional) — 繁體中文</div><div class="locale-row__code">zh-rTW</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="cree b+cr"><div class="locale-row__info"><div class="locale-row__name">Cree</div><div class="locale-row__code">b+cr</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="czech cs čeština"><div class="locale-row__info"><div class="locale-row__name">Czech — Čeština</div><div class="locale-row__code">cs</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="dakota b+dak"><div class="locale-row__info"><div class="locale-row__name">Dakota</div><div class="locale-row__code">b+dak</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="dutch nl nederlands"><div class="locale-row__info"><div class="locale-row__name">Dutch — Nederlands</div><div class="locale-row__code">nl</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="english australia en-rau"><div class="locale-row__info"><div class="locale-row__name">English (Australia)</div><div class="locale-row__code">en-rAU</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="english uk en-rgb"><div class="locale-row__info"><div class="locale-row__name">English (UK)</div><div class="locale-row__code">en-rGB</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="english india en-rin"><div class="locale-row__info"><div class="locale-row__name">English (India)</div><div class="locale-row__code">en-rIN</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="estonian et eesti"><div class="locale-row__info"><div class="locale-row__name">Estonian — Eesti</div><div class="locale-row__code">et</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="estonian estonia et-ree"><div class="locale-row__info"><div class="locale-row__name">Estonian (Estonia)</div><div class="locale-row__code">et-rEE</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="french fr français"><div class="locale-row__info"><div class="locale-row__name">French — Français</div><div class="locale-row__code">fr</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="french belgium fr-rbe"><div class="locale-row__info"><div class="locale-row__name">French (Belgium)</div><div class="locale-row__code">fr-rBE</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="georgian ka ქართული"><div class="locale-row__info"><div class="locale-row__name">Georgian — ქართული</div><div class="locale-row__code">ka</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="german de deutsch"><div class="locale-row__info"><div class="locale-row__name">German — Deutsch</div><div class="locale-row__code">de</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="greek el ελληνικά"><div class="locale-row__info"><div class="locale-row__name">Greek — Ελληνικά</div><div class="locale-row__code">el</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="gujarati gu ગુજરાતી"><div class="locale-row__info"><div class="locale-row__name">Gujarati — ગુજરાતી</div><div class="locale-row__code">gu</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="gujarati india gu-rin"><div class="locale-row__info"><div class="locale-row__name">Gujarati (India)</div><div class="locale-row__code">gu-rIN</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="haitian creole ht"><div class="locale-row__info"><div class="locale-row__name">Haitian Creole</div><div class="locale-row__code">ht</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="hausa ha"><div class="locale-row__info"><div class="locale-row__name">Hausa</div><div class="locale-row__code">ha</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="hebrew iw עברית"><div class="locale-row__info"><div class="locale-row__name">Hebrew — עברית</div><div class="locale-row__code">iw</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="hindi hi हिन्दी"><div class="locale-row__info"><div class="locale-row__name">Hindi — हिन्दी</div><div class="locale-row__code">hi</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="ho b+ho"><div class="locale-row__info"><div class="locale-row__name">Ho</div><div class="locale-row__code">b+ho</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="hungarian hu magyar"><div class="locale-row__info"><div class="locale-row__name">Hungarian — Magyar</div><div class="locale-row__code">hu</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="hungarian hungary hu-rhu"><div class="locale-row__info"><div class="locale-row__name">Hungarian (Hungary)</div><div class="locale-row__code">hu-rHU</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="igbo ig"><div class="locale-row__info"><div class="locale-row__name">Igbo</div><div class="locale-row__code">ig</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="indonesian id bahasa indonesia"><div class="locale-row__info"><div class="locale-row__name">Indonesian — Bahasa Indonesia</div><div class="locale-row__code">id</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="indonesian legacy in"><div class="locale-row__info"><div class="locale-row__name">Indonesian (legacy)</div><div class="locale-row__code">in</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="inupiaq b+ik"><div class="locale-row__info"><div class="locale-row__name">Inupiaq</div><div class="locale-row__code">b+ik</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="irish ga gaeilge"><div class="locale-row__info"><div class="locale-row__name">Irish — Gaeilge</div><div class="locale-row__code">ga</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="italian switzerland it-rch"><div class="locale-row__info"><div class="locale-row__name">Italian (Switzerland)</div><div class="locale-row__code">it-rCH</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="japanese ja 日本語"><div class="locale-row__info"><div class="locale-row__name">Japanese — 日本語</div><div class="locale-row__code">ja</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="japanese japan ja-rjp"><div class="locale-row__info"><div class="locale-row__name">Japanese (Japan)</div><div class="locale-row__code">ja-rJP</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="javanese jv"><div class="locale-row__info"><div class="locale-row__name">Javanese</div><div class="locale-row__code">jv</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="kannada kn ಕನ್ನಡ"><div class="locale-row__info"><div class="locale-row__name">Kannada — ಕನ್ನಡ</div><div class="locale-row__code">kn</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="kannada india kn-rin"><div class="locale-row__info"><div class="locale-row__name">Kannada (India)</div><div class="locale-row__code">kn-rIN</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="kazakh kk қазақ"><div class="locale-row__info"><div class="locale-row__name">Kazakh — Қазақ</div><div class="locale-row__code">kk</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="khmer km ខ្មែរ"><div class="locale-row__info"><div class="locale-row__name">Khmer — ខ្មែរ</div><div class="locale-row__code">km</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="kinyarwanda rw"><div class="locale-row__info"><div class="locale-row__name">Kinyarwanda</div><div class="locale-row__code">rw</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="korean ko 한국어"><div class="locale-row__info"><div class="locale-row__name">Korean — 한국어</div><div class="locale-row__code">ko</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="korean korea ko-rkr"><div class="locale-row__info"><div class="locale-row__name">Korean (Korea)</div><div class="locale-row__code">ko-rKR</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="kurdish ku"><div class="locale-row__info"><div class="locale-row__name">Kurdish</div><div class="locale-row__code">ku</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="lakota b+lkt"><div class="locale-row__info"><div class="locale-row__name">Lakota</div><div class="locale-row__code">b+lkt</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="lao lo ລາວ"><div class="locale-row__info"><div class="locale-row__name">Lao — ລາວ</div><div class="locale-row__code">lo</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="latin la"><div class="locale-row__info"><div class="locale-row__name">Latin</div><div class="locale-row__code">la</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="latvian lv latviešu"><div class="locale-row__info"><div class="locale-row__name">Latvian — Latviešu</div><div class="locale-row__code">lv</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="lithuanian lt lietuvių"><div class="locale-row__info"><div class="locale-row__name">Lithuanian — Lietuvių</div><div class="locale-row__code">lt</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="maay somali b+so+maay"><div class="locale-row__info"><div class="locale-row__name">Maay (Somali)</div><div class="locale-row__code">b+so+maay</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="malay ms bahasa melayu"><div class="locale-row__info"><div class="locale-row__name">Malay — Bahasa Melayu</div><div class="locale-row__code">ms</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="malay malaysia ms-rmy"><div class="locale-row__info"><div class="locale-row__name">Malay (Malaysia)</div><div class="locale-row__code">ms-rMY</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="malayalam ml മലയാളം"><div class="locale-row__info"><div class="locale-row__name">Malayalam — മലയാളം</div><div class="locale-row__code">ml</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="malayalam india ml-rin"><div class="locale-row__info"><div class="locale-row__name">Malayalam (India)</div><div class="locale-row__code">ml-rIN</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="marathi mr मराठी"><div class="locale-row__info"><div class="locale-row__name">Marathi — मराठी</div><div class="locale-row__code">mr</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="marathi india mr-rin"><div class="locale-row__info"><div class="locale-row__name">Marathi (India)</div><div class="locale-row__code">mr-rIN</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="mongolian mn"><div class="locale-row__info"><div class="locale-row__name">Mongolian — Монгол</div><div class="locale-row__code">mn</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="navajo nv diné bizaad"><div class="locale-row__info"><div class="locale-row__name">Navajo — Diné Bizaad</div><div class="locale-row__code">nv</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="nepali ne नेपाली"><div class="locale-row__info"><div class="locale-row__name">Nepali — नेपाली</div><div class="locale-row__code">ne</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="norwegian no norsk"><div class="locale-row__info"><div class="locale-row__name">Norwegian — Norsk</div><div class="locale-row__code">no</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="norwegian nynorsk nn"><div class="locale-row__info"><div class="locale-row__name">Norwegian Nynorsk</div><div class="locale-row__code">nn</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="odia or ଓଡ଼ିଆ"><div class="locale-row__info"><div class="locale-row__name">Odia — ଓଡ଼ିଆ</div><div class="locale-row__code">or</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="ojibwe b+oj"><div class="locale-row__info"><div class="locale-row__name">Ojibwe</div><div class="locale-row__code">b+oj</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="oromo om"><div class="locale-row__info"><div class="locale-row__name">Oromo</div><div class="locale-row__code">om</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="pashto ps پښتو"><div class="locale-row__info"><div class="locale-row__name">Pashto — پښتو</div><div class="locale-row__code">ps</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="persian fa فارسی"><div class="locale-row__info"><div class="locale-row__name">Persian — فارسی</div><div class="locale-row__code">fa</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="polish pl polski"><div class="locale-row__info"><div class="locale-row__name">Polish — Polski</div><div class="locale-row__code">pl</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="portuguese pt português"><div class="locale-row__info"><div class="locale-row__name">Portuguese — Português</div><div class="locale-row__code">pt</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="portuguese brazil pt-rbr"><div class="locale-row__info"><div class="locale-row__name">Portuguese (Brazil)</div><div class="locale-row__code">pt-rBR</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="portuguese portugal pt-rpt"><div class="locale-row__info"><div class="locale-row__name">Portuguese (Portugal)</div><div class="locale-row__code">pt-rPT</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="punjabi pa ਪੰਜਾਬੀ"><div class="locale-row__info"><div class="locale-row__name">Punjabi — ਪੰਜਾਬੀ</div><div class="locale-row__code">pa</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="punjabi india pa-rin"><div class="locale-row__info"><div class="locale-row__name">Punjabi (India)</div><div class="locale-row__code">pa-rIN</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="romanian ro română"><div class="locale-row__info"><div class="locale-row__name">Romanian — Română</div><div class="locale-row__code">ro</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="russian ru русский"><div class="locale-row__info"><div class="locale-row__name">Russian — Русский</div><div class="locale-row__code">ru</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="scottish gaelic gd"><div class="locale-row__info"><div class="locale-row__name">Scottish Gaelic</div><div class="locale-row__code">gd</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="galician gl"><div class="locale-row__info"><div class="locale-row__name">Galician</div><div class="locale-row__code">gl</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="serbian sr"><div class="locale-row__info"><div class="locale-row__name">Serbian — Српски</div><div class="locale-row__code">sr</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="serbian latin b+sr+latn"><div class="locale-row__info"><div class="locale-row__name">Serbian (Latin)</div><div class="locale-row__code">b+sr+Latn</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="shona sn"><div class="locale-row__info"><div class="locale-row__name">Shona</div><div class="locale-row__code">sn</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="sinhala si සිංහල"><div class="locale-row__info"><div class="locale-row__name">Sinhala — සිංහල</div><div class="locale-row__code">si</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="slovenian sl slovenščina"><div class="locale-row__info"><div class="locale-row__name">Slovenian — Slovenščina</div><div class="locale-row__code">sl</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="somali so"><div class="locale-row__info"><div class="locale-row__name">Somali</div><div class="locale-row__code">so</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="spanish es español"><div class="locale-row__info"><div class="locale-row__name">Spanish — Español</div><div class="locale-row__code">es</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="spanish argentina es-rar"><div class="locale-row__info"><div class="locale-row__name">Spanish (Argentina)</div><div class="locale-row__code">es-rAR</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="spanish chile es-rcl"><div class="locale-row__info"><div class="locale-row__name">Spanish (Chile)</div><div class="locale-row__code">es-rCL</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="spanish colombia es-rco"><div class="locale-row__info"><div class="locale-row__name">Spanish (Colombia)</div><div class="locale-row__code">es-rCO</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="spanish spain es-res"><div class="locale-row__info"><div class="locale-row__name">Spanish (Spain)</div><div class="locale-row__code">es-rES</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="spanish mexico es-rmx"><div class="locale-row__info"><div class="locale-row__name">Spanish (Mexico)</div><div class="locale-row__code">es-rMX</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="spanish puerto rico es-rpr"><div class="locale-row__info"><div class="locale-row__name">Spanish (Puerto Rico)</div><div class="locale-row__code">es-rPR</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="sundanese su"><div class="locale-row__info"><div class="locale-row__name">Sundanese</div><div class="locale-row__code">su</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="swahili sw kiswahili"><div class="locale-row__info"><div class="locale-row__name">Swahili — Kiswahili</div><div class="locale-row__code">sw</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="swahili kenya sw-rke"><div class="locale-row__info"><div class="locale-row__name">Swahili (Kenya)</div><div class="locale-row__code">sw-rKE</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="tagalog tl"><div class="locale-row__info"><div class="locale-row__name">Tagalog</div><div class="locale-row__code">tl</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="tamil ta தமிழ்"><div class="locale-row__info"><div class="locale-row__name">Tamil — தமிழ்</div><div class="locale-row__code">ta</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="tamil india ta-rin"><div class="locale-row__info"><div class="locale-row__name">Tamil (India)</div><div class="locale-row__code">ta-rIN</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="telugu te తెలుగు"><div class="locale-row__info"><div class="locale-row__name">Telugu — తెలుగు</div><div class="locale-row__code">te</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="telugu india te-rin"><div class="locale-row__info"><div class="locale-row__name">Telugu (India)</div><div class="locale-row__code">te-rIN</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="thai th ไทย"><div class="locale-row__info"><div class="locale-row__name">Thai — ไทย</div><div class="locale-row__code">th</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="thai thailand th-rth"><div class="locale-row__info"><div class="locale-row__name">Thai (Thailand)</div><div class="locale-row__code">th-rTH</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="tibetan bo"><div class="locale-row__info"><div class="locale-row__name">Tibetan — བོད་སྐད</div><div class="locale-row__code">bo</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="turkish tr türkçe"><div class="locale-row__info"><div class="locale-row__name">Turkish — Türkçe</div><div class="locale-row__code">tr</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="ukrainian uk українська"><div class="locale-row__info"><div class="locale-row__name">Ukrainian — Українська</div><div class="locale-row__code">uk</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="urdu ur اردو"><div class="locale-row__info"><div class="locale-row__name">Urdu — اردو</div><div class="locale-row__code">ur</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="uzbek uz"><div class="locale-row__info"><div class="locale-row__name">Uzbek</div><div class="locale-row__code">uz</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="vietnamese vi tiếng việt"><div class="locale-row__info"><div class="locale-row__name">Vietnamese — Tiếng Việt</div><div class="locale-row__code">vi</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="vietnamese vietnam vi-rvn"><div class="locale-row__info"><div class="locale-row__name">Vietnamese (Vietnam)</div><div class="locale-row__code">vi-rVN</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="welsh cy cymraeg"><div class="locale-row__info"><div class="locale-row__name">Welsh — Cymraeg</div><div class="locale-row__code">cy</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="yoruba yo"><div class="locale-row__info"><div class="locale-row__name">Yoruba</div><div class="locale-row__code">yo</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="zulu zu"><div class="locale-row__info"><div class="locale-row__name">Zulu</div><div class="locale-row__code">zu</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="croatian croatia hr-rhr"><div class="locale-row__info"><div class="locale-row__name">Croatian (Croatia)</div><div class="locale-row__code">hr-rHR</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+      <div class="locale-row" data-lang="armenian hy"><div class="locale-row__info"><div class="locale-row__name">Armenian — Հայերեն</div><div class="locale-row__code">hy</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.4%"></div></div><div class="locale-row__pct pct--high">93.4%</div></div>
+    </div>
+  </div>
+
+  <!-- ═══════ Tier 2: 93.3% — 1 Locale ═══════ -->
+  <div class="tier-section fade-in">
+    <div class="tier-header">
+      <span class="tier-badge tier-badge--high">93.3%</span>
+      <h2>Slightly Lower <span class="count">— 1 locale</span></h2>
+    </div>
+    <div class="locale-grid">
+      <div class="locale-row" data-lang="italian it italiano"><div class="locale-row__info"><div class="locale-row__name">Italian — Italiano</div><div class="locale-row__code">it</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:93.3%"></div></div><div class="locale-row__pct pct--high">93.3%</div></div>
+    </div>
+  </div>
+
+  <!-- ═══════ Tier 3: 91.0% — 5 Locales ═══════ -->
+  <div class="tier-section fade-in">
+    <div class="tier-header">
+      <span class="tier-badge tier-badge--high">91.0%</span>
+      <h2>Nordic / Slavic <span class="count">— 5 locales</span></h2>
+    </div>
+    <div class="locale-grid">
+      <div class="locale-row" data-lang="danish da dansk"><div class="locale-row__info"><div class="locale-row__name">Danish — Dansk</div><div class="locale-row__code">da</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:91%"></div></div><div class="locale-row__pct pct--high">91.0%</div></div>
+      <div class="locale-row" data-lang="finnish fi suomi"><div class="locale-row__info"><div class="locale-row__name">Finnish — Suomi</div><div class="locale-row__code">fi</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:91%"></div></div><div class="locale-row__pct pct--high">91.0%</div></div>
+      <div class="locale-row" data-lang="norwegian bokmål nb"><div class="locale-row__info"><div class="locale-row__name">Norwegian Bokmål</div><div class="locale-row__code">nb</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:91%"></div></div><div class="locale-row__pct pct--high">91.0%</div></div>
+      <div class="locale-row" data-lang="slovak sk slovenčina"><div class="locale-row__info"><div class="locale-row__name">Slovak — Slovenčina</div><div class="locale-row__code">sk</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:91%"></div></div><div class="locale-row__pct pct--high">91.0%</div></div>
+      <div class="locale-row" data-lang="swedish sv svenska"><div class="locale-row__info"><div class="locale-row__name">Swedish — Svenska</div><div class="locale-row__code">sv</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--high" style="width:91%"></div></div><div class="locale-row__pct pct--high">91.0%</div></div>
+    </div>
+  </div>
+
+  <!-- ═══════ Tier 4: 80.4% — 7 Locales ═══════ -->
+  <div class="tier-section fade-in">
+    <div class="tier-header">
+      <span class="tier-badge tier-badge--mid">80.4%</span>
+      <h2>Regional Variants <span class="count">— 7 locales</span></h2>
+    </div>
+    <div class="locale-grid">
+      <div class="locale-row" data-lang="catalan ca català"><div class="locale-row__info"><div class="locale-row__name">Catalan — Català</div><div class="locale-row__code">ca</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--mid" style="width:80.4%"></div></div><div class="locale-row__pct pct--mid">80.4%</div></div>
+      <div class="locale-row" data-lang="german austria de-rat"><div class="locale-row__info"><div class="locale-row__name">German (Austria)</div><div class="locale-row__code">de-rAT</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--mid" style="width:80.4%"></div></div><div class="locale-row__pct pct--mid">80.4%</div></div>
+      <div class="locale-row" data-lang="german switzerland de-rch"><div class="locale-row__info"><div class="locale-row__name">German (Switzerland)</div><div class="locale-row__code">de-rCH</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--mid" style="width:80.4%"></div></div><div class="locale-row__pct pct--mid">80.4%</div></div>
+      <div class="locale-row" data-lang="french canada fr-rca"><div class="locale-row__info"><div class="locale-row__name">French (Canada)</div><div class="locale-row__code">fr-rCA</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--mid" style="width:80.4%"></div></div><div class="locale-row__pct pct--mid">80.4%</div></div>
+      <div class="locale-row" data-lang="swiss german gsw"><div class="locale-row__info"><div class="locale-row__name">Swiss German</div><div class="locale-row__code">gsw</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--mid" style="width:80.4%"></div></div><div class="locale-row__pct pct--mid">80.4%</div></div>
+      <div class="locale-row" data-lang="croatian hr hrvatski"><div class="locale-row__info"><div class="locale-row__name">Croatian — Hrvatski</div><div class="locale-row__code">hr</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--mid" style="width:80.4%"></div></div><div class="locale-row__pct pct--mid">80.4%</div></div>
+      <div class="locale-row" data-lang="dutch belgium nl-rbe"><div class="locale-row__info"><div class="locale-row__name">Dutch (Belgium)</div><div class="locale-row__code">nl-rBE</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--mid" style="width:80.4%"></div></div><div class="locale-row__pct pct--mid">80.4%</div></div>
+    </div>
+  </div>
+
+  <!-- ═══════ Tier 5: 3.0% — 4 Indigenous Languages ═══════ -->
+  <div class="tier-section fade-in">
+    <div class="tier-header">
+      <span class="tier-badge tier-badge--low">3.0%</span>
+      <h2>Indigenous Languages <span class="count">— 4 locales &mdash; need full translation</span></h2>
+    </div>
+    <div class="locale-grid">
+      <div class="locale-row" data-lang="kiowa apache b+apw"><div class="locale-row__info"><div class="locale-row__name">Kiowa Apache</div><div class="locale-row__code">b+apw</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--low" style="width:3%"></div></div><div class="locale-row__pct pct--low">3.0%</div></div>
+      <div class="locale-row" data-lang="choctaw b+cho"><div class="locale-row__info"><div class="locale-row__name">Choctaw</div><div class="locale-row__code">b+cho</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--low" style="width:3%"></div></div><div class="locale-row__pct pct--low">3.0%</div></div>
+      <div class="locale-row" data-lang="eastern keres b+kee"><div class="locale-row__info"><div class="locale-row__name">Eastern Keres</div><div class="locale-row__code">b+kee</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--low" style="width:3%"></div></div><div class="locale-row__pct pct--low">3.0%</div></div>
+      <div class="locale-row" data-lang="zuni b+zun"><div class="locale-row__info"><div class="locale-row__name">Zuni</div><div class="locale-row__code">b+zun</div></div><div class="locale-row__bar"><div class="locale-row__fill fill--low" style="width:3%"></div></div><div class="locale-row__pct pct--low">3.0%</div></div>
+    </div>
+  </div>
+
+  </div><!-- /localeContainer -->
+
+  <div style="text-align:center;padding:48px 0;border-top:1px solid var(--surface-border);margin-top:40px;">
+    <p style="color:var(--text-tertiary);font-size:13px;">Data from <a href="https://github.com/LockLoom-LLC/LockLoom" target="_blank" rel="noopener">locales_todo.md</a> &bull; Build 422 &bull; 1,094 strings per locale</p>
+    <p style="color:var(--text-muted);font-size:12px;margin-top:8px;">&copy; 2025-2026 LockLoom LLC</p>
+  </div>
+</div>
+
+<script>
+// Search filter
+const search = document.getElementById('langSearch');
+if (search) {
+  search.addEventListener('input', () => {
+    const q = search.value.toLowerCase().trim();
+    document.querySelectorAll('.locale-row').forEach(row => {
+      const data = row.getAttribute('data-lang') || '';
+      const name = row.querySelector('.locale-row__name')?.textContent.toLowerCase() || '';
+      row.style.display = (data.includes(q) || name.includes(q)) ? '' : 'none';
+    });
+    // Hide empty tiers
+    document.querySelectorAll('.tier-section').forEach(tier => {
+      const visible = tier.querySelectorAll('.locale-row:not([style*="display: none"])');
+      tier.style.display = visible.length ? '' : 'none';
+    });
+  });
+}
+</script>
+<script src="js/main.js"></script>
+</body>
+</html>

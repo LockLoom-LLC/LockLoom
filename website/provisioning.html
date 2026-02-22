@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Device Owner Provisioning — LockLoom</title>
+  <meta name="description" content="Scan the LockLoom Device Owner provisioning QR code on Android 13+ setup screen to install LockLoom as device administrator." />
+  <meta name="theme-color" content="#030303" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="https://lockloom-llc.github.io/LockLoom/assets/ic_launcher-playstore-512.png" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/policy.css" />
+  <style>
+    .qr-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+    .qr-info h2 { font-size: 24px; font-weight: 700; margin-bottom: 12px; }
+    .qr-info p { color: var(--text-secondary); font-size: 15px; line-height: 1.7; margin-bottom: 16px; }
+    .qr-info .muted { color: var(--text-tertiary); font-size: 13px; }
+    .qr-image-wrap {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      text-align: center;
+    }
+    .qr-image-wrap img { width: 100%; max-width: 400px; border-radius: 8px; }
+    .qr-image-wrap p { color: #666; font-size: 12px; margin-top: 12px; }
+    #qr-status { color: var(--text-tertiary); font-size: 13px; margin-top: 8px; }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 24px;
+    }
+    .prov-step {
+      background: var(--surface-primary);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+    }
+    .prov-step strong { display: block; margin-bottom: 6px; color: var(--accent); font-size: 13px; }
+    .prov-step p { color: var(--text-secondary); font-size: 13px; line-height: 1.5; margin: 0; }
+
+    @media (max-width: 700px) {
+      .qr-layout { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav" role="navigation">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <img src="https://lockloom-llc.github.io/LockLoom/assets/ic_launcher-playstore-512.png" alt="LockLoom" width="36" height="36" />
+      <span>LockLoom</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html#features">Features</a></li>
+      <li><a href="index.html#pricing">Pricing</a></li>
+      <li><a href="index.html#docs">Docs</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+    </ul>
+    <a href="index.html#pricing" class="nav__cta">Get LockLoom</a>
+    <button class="nav__burger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="policy-hero">
+  <p class="section-tag">Setup</p>
+  <h1 class="section-title" style="margin-bottom:8px;">Device Owner Provisioning</h1>
+  <p style="color:var(--text-secondary);font-size:16px;">Scan this QR on Android 13+ setup screen</p>
+</div>
+
+<!-- Content -->
+<div class="qr-layout">
+  <div class="qr-info">
+    <h2>How to Provision</h2>
+    <p>LockLoom uses Android's Device Owner mode for the strongest possible device protection. This requires enrolling during the initial device setup (after factory reset).</p>
+
+    <div class="steps-grid">
+      <div class="prov-step">
+        <strong>Step 1</strong>
+        <p>Factory reset your Android device (or use a brand new device).</p>
+      </div>
+      <div class="prov-step">
+        <strong>Step 2</strong>
+        <p>On the "Welcome" screen, tap the word "Welcome" 6-7 times rapidly.</p>
+      </div>
+      <div class="prov-step">
+        <strong>Step 3</strong>
+        <p>A QR code scanner will appear. Scan the QR code shown on this page.</p>
+      </div>
+      <div class="prov-step">
+        <strong>Step 4</strong>
+        <p>Android will automatically download, install, and configure LockLoom as Device Owner.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:24px;"><a id="pngLink" href="#" target="_blank" rel="noopener noreferrer" style="font-weight:600;">Open full-size PNG &rarr;</a></p>
+    <p id="qr-status" class="muted">Loading&hellip;</p>
+  </div>
+
+  <div class="qr-image-wrap">
+    <img id="qr" alt="LockLoom Device Owner Provisioning QR Code" />
+    <p>Requires Android 13+ (API 33)</p>
+  </div>
+</div>
+
+<script>
+(async () => {
+  const status  = document.getElementById('qr-status');
+  const qrImg   = document.getElementById('qr');
+  const pngLink = document.getElementById('pngLink');
+
+  const PNG_URL = 'https://lockloom-llc.github.io/LockLoom/lockloom-dpc-qr.png';
+  qrImg.src = PNG_URL + '?v=' + Date.now();
+  pngLink.href = PNG_URL;
+
+  try {
+    const res = await fetch('https://api.github.com/repos/LockLoom-LLC/LockLoom/releases/latest', {
+      headers: { 'Accept': 'application/vnd.github.v3+json' }
+    });
+    if (!res.ok) throw new Error(res.status);
+    const data = await res.json();
+    status.textContent = `QR loaded from GitHub Pages \u2022 latest release: ${data.tag_name || data.name || 'unknown'}`;
+  } catch {
+    status.textContent = 'QR loaded from GitHub Pages';
+  }
+})();
+</script>
+<script src="js/main.js"></script>
+</body>
+</html>

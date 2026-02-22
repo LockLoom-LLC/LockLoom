@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LockLoom — Security Without Surveillance</title>
+  <meta name="description" content="LockLoom is a cross-platform mobile security app with biometric + PIN enforcement, covert distress signals, and zero data collection. One-time purchase. Lifetime updates." />
+  <meta name="theme-color" content="#030303" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="LockLoom — Security Without Surveillance" />
+  <meta property="og:description" content="Multi-factor mobile security for personal safety. Biometric + PIN enforcement, covert distress signals, zero data exfiltration. Pay once, protected forever." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://lockloom.app" />
+  <meta property="og:image" content="https://lockloom-llc.github.io/LockLoom/assets/ic_launcher-playstore-512.png" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="LockLoom — Security Without Surveillance" />
+  <meta name="twitter:description" content="One-time purchase mobile security. No subscriptions. No data collection." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://lockloom-llc.github.io/LockLoom/assets/ic_launcher-playstore-512.png" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ═══════════════ NAVIGATION ═══════════════ -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="#" class="nav__logo" aria-label="LockLoom home">
+      <img src="https://lockloom-llc.github.io/LockLoom/assets/ic_launcher-playstore-512.png" alt="LockLoom icon" width="36" height="36" />
+      <span>LockLoom</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#distress">Distress&nbsp;System</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="languages.html">Languages</a></li>
+      <li><a href="#docs">Docs</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+    </ul>
+    <a href="#pricing" class="nav__cta">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Get LockLoom
+    </a>
+    <button class="nav__burger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<header class="hero">
+  <div class="hero__bg" aria-hidden="true"></div>
+  <div class="hero__grid" aria-hidden="true"></div>
+  <div class="hero__content fade-in">
+    <div class="hero__badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Zero Data Collection &bull; Zero Backend &bull; Zero Tracking
+    </div>
+    <h1>Security Without<br /><span class="highlight">Surveillance</span></h1>
+    <p class="hero__sub">Multi-factor mobile security with covert distress signaling, encrypted hidden workspaces, and post-quantum protection. Your data never touches our servers&mdash;ever.</p>
+    <div class="hero__actions">
+      <a href="#pricing" class="btn btn--primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Get LockLoom &mdash; $39.99
+      </a>
+      <a href="#features" class="btn btn--secondary">
+        Explore Features
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- Trusted bar -->
+<div class="trusted fade-in">
+  <div class="container">
+    <p class="trusted__label">Built for those who need it most</p>
+    <div class="trusted__items">
+      <span>🛡️ Journalists</span>
+      <span>✊ Activists</span>
+      <span>💜 DV Survivors</span>
+      <span>🔐 Privacy Advocates</span>
+      <span>🌍 144 Languages</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════ FEATURES ═══════════════ -->
+<section id="features" class="features">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-tag">Core Features</p>
+      <h2 class="section-title">Comprehensive Device Protection</h2>
+      <p class="section-desc">Every security layer you need, built into one app with zero data collection and zero backend dependency.</p>
+    </div>
+
+    <div class="features__grid">
+
+      <div class="feature-card fade-in">
+        <div class="feature-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <h3>Multi-Factor Enforcement</h3>
+        <p>Biometric + PIN for device and app unlock. Configure per-app policies supporting fingerprint, face, pattern, and PIN combinations.</p>
+      </div>
+
+      <div class="feature-card fade-in">
+        <div class="feature-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Covert Distress System</h3>
+        <p>Silent SOS from the lock screen via special PIN entry. No visual indicators. Automatic GPS tracking and evidence capture sent to your emergency contacts.</p>
+      </div>
+
+      <div class="feature-card fade-in">
+        <div class="feature-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.8 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
+        </div>
+        <h3>Configurable Encryption</h3>
+        <p>Choose between XChaCha20-Poly1305 or AES-256-GCM. Post-quantum ML-KEM-1024 encrypted Secure Vault with NFC key pairing.</p>
+      </div>
+
+      <div class="feature-card fade-in">
+        <div class="feature-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <h3>Secure App Hiding</h3>
+        <p>Hide sensitive apps in an encrypted hidden workspace with a dedicated PIN. 96 bundled cloak icons to disguise LockLoom itself.</p>
+      </div>
+
+      <div class="feature-card fade-in">
+        <div class="feature-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <h3>Evidence Capture</h3>
+        <p>Covert front/rear camera photos, audio, and video capture — all without flash, sound, or screen activity. Triggered by distress code or codewords.</p>
+      </div>
+
+      <div class="feature-card fade-in">
+        <div class="feature-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <h3>Physical Tamper Detection</h3>
+        <p>USB insertion, SIM removal, and locked-device network isolation. Boot-time radio blocking prevents all data exfiltration before authentication.</p>
+      </div>
+
+      <div class="feature-card fade-in">
+        <div class="feature-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+        </div>
+        <h3>Network Cloak</h3>
+        <p>Silence WiFi, Airplane Mode, Bluetooth, and NFC with one tap. Per-radio persistence with auto-restore on distress PIN activation.</p>
+      </div>
+
+      <div class="feature-card fade-in">
+        <div class="feature-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3>Silent Codewords</h3>
+        <p>Configure phrases detected from SMS, RCS, WhatsApp, Telegram, Signal, and any notification-sending app. Three-layer detection with SHA-256 dedup.</p>
+      </div>
+
+      <div class="feature-card fade-in">
+        <div class="feature-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        </div>
+        <h3>Hardware Kill Switch</h3>
+        <p>Optional NFC tag or Bluetooth fob — device locks immediately if absent. Combines with USB blocking and SIM protection for full physical security.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ DISTRESS SYSTEM ═══════════════ -->
+<section id="distress">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-tag">🚨 Life Safety</p>
+      <h2 class="section-title">Covert Distress System</h2>
+      <p class="section-desc">Designed with a zero data exfiltration policy — all SOS alerts go directly to your emergency contacts. No servers. No LockLoom infrastructure involved.</p>
+    </div>
+
+    <div class="distress__grid">
+      <div class="distress-card fade-in">
+        <h3>🔑 Hidden PIN Triggering</h3>
+        <p>Embed the distress code in any longer credential attempt. The attacker sees a normal "wrong PIN" failure while the SOS beacon launches silently in the background.</p>
+      </div>
+      <div class="distress-card fade-in">
+        <h3>📍 Movement Tracking</h3>
+        <p>15-minute tracking window sends 3 location updates (0, 5, 15 min) to establish direction of travel with GPS coordinates and Google Maps links.</p>
+      </div>
+      <div class="distress-card fade-in">
+        <h3>📸 Silent Evidence</h3>
+        <p>Covert front and rear camera photos, audio recording, and video capture — all without flash, sound, or screen activity. Automatically attached to SOS alerts.</p>
+      </div>
+      <div class="distress-card fade-in">
+        <h3>📱 Flash SMS (Class 0)</h3>
+        <p>Immediate popup on the recipient's screen that bypasses Do Not Disturb. Plus regular SMS for persistent records and Gmail OAuth for email alerts.</p>
+      </div>
+      <div class="distress-card fade-in">
+        <h3>🌡️ Forensic Data</h3>
+        <p>GPS, barometric pressure, speed, heading, altitude, battery, network type, WiFi SSID, cell tower ID, ambient light, and proximity sensor status.</p>
+      </div>
+      <div class="distress-card fade-in">
+        <h3>💬 Codeword Detection</h3>
+        <p>Configure trigger phrases detected from ALL messaging sources — SMS, RCS, WhatsApp, Telegram, Signal, iMessage bridges, and any notification-sending app.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ HOW IT WORKS ═══════════════ -->
+<section id="how-it-works" class="how-it-works" style="background: var(--bg-abyss);">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-tag">Getting Started</p>
+      <h2 class="section-title">Set Up in Minutes</h2>
+      <p class="section-desc">LockLoom uses Android's Device Owner mode for the strongest possible protection — no root required.</p>
+    </div>
+
+    <div class="how-it-works__steps">
+      <div class="step fade-in">
+        <div class="step__number">1</div>
+        <h3>Factory Reset</h3>
+        <p>Start with a fresh device or factory reset. On the Android welcome screen, tap "Welcome" 6-7 times to enter provisioning mode.</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step__number">2</div>
+        <h3>Scan QR Code</h3>
+        <p>Scan the LockLoom Device Owner provisioning QR code. Android automatically installs and configures LockLoom as the device administrator.</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step__number">3</div>
+        <h3>Configure Security</h3>
+        <p>Set your biometric + PIN policies, configure emergency contacts, choose your distress code, and enable the features you need.</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step__number">4</div>
+        <h3>Protected</h3>
+        <p>Your device is now hardened with multi-factor authentication, tamper detection, and covert distress capabilities. Zero data leaves your phone.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ PRICING ═══════════════ -->
+<section id="pricing" class="pricing">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-tag">Simple Pricing</p>
+      <h2 class="section-title">Pay Once. Protected Forever.</h2>
+      <p class="section-desc">No subscriptions. No recurring fees. No accounts. One payment unlocks everything — including all future updates.</p>
+    </div>
+
+    <div class="pricing__card fade-in">
+      <span class="pricing__badge">Lifetime Access</span>
+      <div class="pricing__price"><sup>$</sup>39<sup>.99</sup></div>
+      <p class="pricing__once">One-time purchase &bull; All features &bull; Forever</p>
+
+      <ul class="pricing__features">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Unlimited app protection
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Hidden encrypted workspace
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Covert distress PIN &amp; codewords
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Network Cloak &amp; USB blocking
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Post-quantum Secure Vault
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          96 cloak icons &amp; Legal Shield
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Lifetime updates — no subscription ever
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Zero data collection — no account required
+        </li>
+      </ul>
+
+      <a href="#" class="btn btn--primary" style="width:100%;justify-content:center;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Get LockLoom on Google Play
+      </a>
+
+      <p class="pricing__compare">
+        Competitors charge <strong>$10+/month</strong> — that's $360 over 3 years.<br />
+        LockLoom: <strong>$39.99 total. Forever.</strong>
+      </p>
+    </div>
+
+    <!-- Special programs -->
+    <div style="text-align:center;margin-top:48px;" class="fade-in">
+      <p style="color:var(--text-tertiary);font-size:14px;margin-bottom:12px;">Special Programs</p>
+      <p style="color:var(--text-secondary);font-size:15px;max-width:600px;margin:0 auto;line-height:1.7;">
+        <strong style="color:var(--accent);">Free licenses</strong> available for domestic violence survivors (via partner orgs), journalists (CPJ, RSF, EFF referrals), and human rights activists. No verification required for DV survivors — trust-based, dignity-preserving.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ LANGUAGES ═══════════════ -->
+<section id="languages" class="languages">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-tag">🌍 Internationalization</p>
+      <h2 class="section-title">144 Languages. Native Scripts.</h2>
+      <p class="section-desc">Full localization with native script display. Regional discounts auto-applied for global accessibility.</p>
+    </div>
+
+    <div class="lang-cloud fade-in">
+      <a href="languages.html" class="lang-tag">English</a>
+      <a href="languages.html" class="lang-tag">Español</a>
+      <a href="languages.html" class="lang-tag">Français</a>
+      <a href="languages.html" class="lang-tag">Deutsch</a>
+      <a href="languages.html" class="lang-tag">Italiano</a>
+      <a href="languages.html" class="lang-tag">Português</a>
+      <a href="languages.html" class="lang-tag">日本語</a>
+      <a href="languages.html" class="lang-tag">中文 (简体)</a>
+      <a href="languages.html" class="lang-tag">中文 (繁體)</a>
+      <a href="languages.html" class="lang-tag">한국어</a>
+      <a href="languages.html" class="lang-tag">العربية</a>
+      <a href="languages.html" class="lang-tag">हिन्दी</a>
+      <a href="languages.html" class="lang-tag">বাংলা</a>
+      <a href="languages.html" class="lang-tag">Русский</a>
+      <a href="languages.html" class="lang-tag">Türkçe</a>
+      <a href="languages.html" class="lang-tag">Tiếng Việt</a>
+      <a href="languages.html" class="lang-tag">ไทย</a>
+      <a href="languages.html" class="lang-tag">Bahasa Indonesia</a>
+      <a href="languages.html" class="lang-tag">தமிழ்</a>
+      <a href="languages.html" class="lang-tag">اردو</a>
+      <a href="languages.html" class="lang-tag">Polski</a>
+      <a href="languages.html" class="lang-tag">Ελληνικά</a>
+      <a href="languages.html" class="lang-tag">Nederlands</a>
+      <a href="languages.html" class="lang-tag">Română</a>
+      <a href="languages.html" class="lang-tag">Українська</a>
+      <a href="languages.html" class="lang-tag">Svenska</a>
+      <a href="languages.html" class="lang-tag">Norsk</a>
+      <a href="languages.html" class="lang-tag">Suomi</a>
+      <a href="languages.html" class="lang-tag">Čeština</a>
+      <a href="languages.html" class="lang-tag">Magyar</a>
+      <a href="languages.html" class="lang-tag">Kiswahili</a>
+      <a href="languages.html" class="lang-tag">አማርኛ</a>
+      <a href="languages.html" class="lang-tag">ქართული</a>
+      <a href="languages.html" class="lang-tag">ಕನ್ನಡ</a>
+      <a href="languages.html" class="lang-tag">മലയാളം</a>
+      <a href="languages.html" class="lang-tag lang-tag--more">+ 109 more →</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ TECHNICAL SPECS ═══════════════ -->
+<section id="specs">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-tag">Technical Details</p>
+      <h2 class="section-title">Under the Hood</h2>
+    </div>
+    <div class="fade-in" style="overflow-x:auto;">
+      <table class="specs__table">
+        <thead>
+          <tr><th>Specification</th><th>Details</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Platforms</td><td>Android (production) &bull; iOS (in development)</td></tr>
+          <tr><td>Architecture</td><td>Kotlin Multiplatform (KMP) shared core &bull; Jetpack Compose UI</td></tr>
+          <tr><td>Android Mode</td><td>Device Owner (strongest protection, no root required)</td></tr>
+          <tr><td>Encryption</td><td>XChaCha20-Poly1305 (default) or AES-256-GCM &bull; ML-KEM-1024 for Vault</td></tr>
+          <tr><td>Biometrics</td><td>Fingerprint &bull; Face &bull; Pattern &bull; PIN &bull; Multi-factor chains</td></tr>
+          <tr><td>Backend</td><td>None — zero-backend architecture, all processing on-device</td></tr>
+          <tr><td>Data Collection</td><td>None — no telemetry, no analytics, no accounts</td></tr>
+          <tr><td>Alert Dispatch</td><td>Flash SMS (Class 0) &bull; Regular SMS &bull; Gmail OAuth &bull; SMTP</td></tr>
+          <tr><td>Codeword Detection</td><td>SMS broadcast + ContentObserver + NotificationListener (3-layer)</td></tr>
+          <tr><td>Languages</td><td>144 locales with native script display &bull; Per-app language API</td></tr>
+          <tr><td>Minimum Android</td><td>API 24 (Android 7.0) &bull; Device Owner: API 33+ (Android 13+)</td></tr>
+          <tr><td>Purchase Model</td><td>$39.99 one-time via Google Play Billing &bull; No in-app subscriptions</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ DOCS & POLICIES ═══════════════ -->
+<section id="docs" style="background: var(--bg-abyss);">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-tag">Documentation</p>
+      <h2 class="section-title">Docs &amp; Policies</h2>
+      <p class="section-desc">Transparency is fundamental to trust. Read our policies and technical documentation.</p>
+    </div>
+
+    <div class="docs__grid">
+
+      <a href="privacy.html" class="doc-card fade-in">
+        <div class="doc-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div>
+          <h3>Privacy Policy</h3>
+          <p>Zero data collection. Zero tracking. Zero backend. Read exactly what LockLoom does (and doesn't) collect.</p>
+        </div>
+      </a>
+
+      <a href="https://lockloom-llc.github.io/LockLoom/policies/lockloom-device-owner-policies.html" class="doc-card fade-in" target="_blank" rel="noopener">
+        <div class="doc-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <div>
+          <h3>Device Owner Policies</h3>
+          <p>Full disclosure of all Device Owner capabilities used, when they activate, and how to disable them.</p>
+        </div>
+      </a>
+
+      <a href="https://lockloom-llc.github.io/LockLoom/policies/lockloom-device-owner-policies.html" class="doc-card fade-in" target="_blank" rel="noopener">
+        <div class="doc-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+        </div>
+        <div>
+          <h3>Runtime Permission Disclosure</h3>
+          <p>Every permission LockLoom requests, why it's needed, and what happens if you deny it.</p>
+        </div>
+      </a>
+
+      <a href="https://github.com/LockLoom-LLC/LockLoom" class="doc-card fade-in" target="_blank" rel="noopener">
+        <div class="doc-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        </div>
+        <div>
+          <h3>GitHub Repository</h3>
+          <p>Source code, architecture docs, style guides, and technical documentation.</p>
+        </div>
+      </a>
+
+      <a href="#" class="doc-card fade-in">
+        <div class="doc-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div>
+          <h3>Support</h3>
+          <p>Contact us for technical support, free license programs, or bulk organizational pricing.</p>
+        </div>
+      </a>
+
+      <a href="provisioning.html" class="doc-card fade-in">
+        <div class="doc-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><rect x="7" y="7" width="10" height="10"/><rect x="9" y="9" width="6" height="6"/></svg>
+        </div>
+        <div>
+          <h3>Provisioning QR Code</h3>
+          <p>Scan the Device Owner provisioning QR code on Android 13+ setup screen to install LockLoom.</p>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ FAQ ═══════════════ -->
+<section id="faq" class="faq">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-tag">FAQ</p>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+    </div>
+
+    <div class="faq__list fade-in">
+
+      <div class="faq__item">
+        <button class="faq__q">
+          What is Device Owner mode?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq__a">
+          <p>Device Owner is Android's enterprise-grade administration mode that gives LockLoom the deepest possible device protection — including the ability to enforce lock policies, block USB data transfer, control radios, and auto-grant permissions. It requires enrolling during device setup (factory reset) but does <strong>not</strong> require root access.</p>
+        </div>
+      </div>
+
+      <div class="faq__item">
+        <button class="faq__q">
+          Does LockLoom collect any data?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq__a">
+          <p><strong>No.</strong> LockLoom has zero backend infrastructure. There are no servers, no accounts, no analytics, no telemetry, and no crash reporting that leaves your device. All distress alerts go directly from your phone to your emergency contacts via SMS/email. We never see them.</p>
+        </div>
+      </div>
+
+      <div class="faq__item">
+        <button class="faq__q">
+          Why a one-time purchase instead of subscription?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq__a">
+          <p>Subscriptions require accounts. Accounts require data. Data is a liability. LockLoom's zero-data-collection promise is incompatible with subscription billing. You pay once, we forget you exist. All future updates are included.</p>
+        </div>
+      </div>
+
+      <div class="faq__item">
+        <button class="faq__q">
+          Can an attacker tell LockLoom is installed?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq__a">
+          <p>LockLoom includes 96 bundled cloak icons to disguise itself as a family-friendly app (calculator, weather, game, etc.). When you trigger a distress code, there are zero visual indicators — no popups, no sounds, no screen changes. The attacker sees a normal authentication failure.</p>
+        </div>
+      </div>
+
+      <div class="faq__item">
+        <button class="faq__q">
+          Is LockLoom available for iOS?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq__a">
+          <p>LockLoom is currently production-ready on Android. The iOS version is in active development using Kotlin Multiplatform with a shared core library. The shared security logic, biometric contracts, and distress management are already cross-platform.</p>
+        </div>
+      </div>
+
+      <div class="faq__item">
+        <button class="faq__q">
+          How do I get a free license?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq__a">
+          <p>Free licenses are available for domestic violence survivors (via partner organizations — no personal verification required), journalists (CPJ, RSF, EFF referrals or press credentials), and human rights activists (Access Now referrals). Contact us through the support page or your referral organization.</p>
+        </div>
+      </div>
+
+      <div class="faq__item">
+        <button class="faq__q">
+          What happens if I change phones?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq__a">
+          <p>Your purchase is tied to your Google Play account. Use "Restore Purchase" on your new device after enrolling in Device Owner mode. Since LockLoom stores no data on our servers, your configurations are device-local — you'll need to re-configure security settings on the new device.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ CTA BANNER ═══════════════ -->
+<section style="padding: 80px 0; text-align: center; background: linear-gradient(180deg, var(--bg-void) 0%, var(--bg-abyss) 100%);">
+  <div class="container fade-in">
+    <h2 style="font-size: clamp(28px, 4vw, 40px); font-weight: 800; margin-bottom: 16px;">Your Security Shouldn't Have<br />a Monthly Fee</h2>
+    <p style="color: var(--text-secondary); font-size: 17px; margin-bottom: 32px; max-width: 520px; margin-left: auto; margin-right: auto;">One payment. All features. Lifetime updates. Zero data collection. The last security app you'll ever buy.</p>
+    <a href="#pricing" class="btn btn--primary" style="font-size: 17px; padding: 16px 36px;">
+      Get LockLoom &mdash; $39.99 Once
+    </a>
+  </div>
+</section>
+
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+
+      <div class="footer__brand">
+        <a href="#" class="nav__logo">
+          <img src="https://lockloom-llc.github.io/LockLoom/assets/ic_launcher-playstore-512.png" alt="LockLoom" width="32" height="32" />
+          <span>LockLoom</span>
+        </a>
+        <p>Security without surveillance. Multi-factor mobile protection with zero data collection and zero backend infrastructure.</p>
+      </div>
+
+      <div class="footer__col">
+        <h4>Product</h4>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#distress">Distress System</a>
+        <a href="#languages">Languages</a>
+        <a href="#specs">Technical Specs</a>
+      </div>
+
+      <div class="footer__col">
+        <h4>Resources</h4>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="provisioning.html">QR Provisioning</a>
+        <a href="https://lockloom-llc.github.io/LockLoom/policies/lockloom-device-owner-policies.html" target="_blank" rel="noopener">Device Owner Policies</a>
+        <a href="https://github.com/LockLoom-LLC/LockLoom" target="_blank" rel="noopener">GitHub</a>
+      </div>
+
+      <div class="footer__col">
+        <h4>Programs</h4>
+        <a href="#">Survivor Support</a>
+        <a href="#">Journalist Program</a>
+        <a href="#">Bulk Licensing</a>
+        <a href="#">Contact Support</a>
+      </div>
+
+    </div>
+
+    <div class="footer__bottom">
+      <p>&copy; 2025-2026 LockLoom LLC. All rights reserved.</p>
+      <div>
+        <a href="privacy.html">Privacy</a> &nbsp;&bull;&nbsp;
+        <a href="#">Terms</a> &nbsp;&bull;&nbsp;
+        <a href="https://lockloom-llc.github.io/LockLoom/policies/lockloom-device-owner-policies.html" target="_blank" rel="noopener">Policies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

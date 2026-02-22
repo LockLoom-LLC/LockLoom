@@ -1,0 +1,81 @@
+/* ═══════════════════════════════════════════════════════════════
+   LockLoom — Privacy Policy Page Styles
+   ═══════════════════════════════════════════════════════════════ */
+
+.policy-hero {
+  padding: 140px 24px 60px;
+  text-align: center;
+  background:
+    radial-gradient(ellipse 50% 40% at 50% 30%, rgba(0,212,170,.04), transparent),
+    var(--bg-void);
+}
+
+.policy-content {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+.policy-content h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 40px 0 12px;
+  color: var(--text-primary);
+}
+.policy-content h3 {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 28px 0 8px;
+  color: var(--text-primary);
+}
+.policy-content p,
+.policy-content li {
+  color: var(--text-secondary);
+  font-size: 15px;
+  line-height: 1.75;
+  margin-bottom: 12px;
+}
+.policy-content ul {
+  padding-left: 20px;
+  margin-bottom: 16px;
+}
+.policy-content li {
+  margin-bottom: 6px;
+}
+.policy-content .updated {
+  color: var(--text-tertiary);
+  font-size: 13px;
+  margin-bottom: 32px;
+}
+.policy-content strong {
+  color: var(--text-primary);
+}
+.policy-content a {
+  color: var(--accent);
+}
+.policy-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 24px;
+  background: var(--surface-primary);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--surface-border);
+}
+.policy-content table th,
+.policy-content table td {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 14px;
+  border-bottom: 1px solid var(--surface-border);
+}
+.policy-content table th {
+  background: var(--surface-elevated);
+  color: var(--text-tertiary);
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+.policy-content table td {
+  color: var(--text-secondary);
+}

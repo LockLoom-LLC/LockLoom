@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LockLoom — Pricing Tiers</title>
+  <meta name="description" content="LockLoom pricing tiers: First Step ($0.99), Shield ($49), Sentinel ($99), Guardian ($119). One-time purchases, no subscriptions, lifetime updates." />
+  <meta name="theme-color" content="#030303" />
+
+  <meta property="og:title" content="LockLoom — Pricing Tiers" />
+  <meta property="og:description" content="Four tiers of protection. One-time purchases. No subscriptions. Every tier includes lifetime updates." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://lockloom.app/tiers.html" />
+  <meta property="og:image" content="https://lockloom-llc.github.io/LockLoom/assets/ic_launcher-playstore-512.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="https://lockloom-llc.github.io/LockLoom/assets/ic_launcher-playstore-512.png" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* ── Tier Cards Grid ────────────────────────────────────── */
+    .tiers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .tier-card {
+      background: var(--surface-primary);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius-xl);
+      padding: 40px 32px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+    .tier-card:hover {
+      border-color: rgba(0,212,170,.25);
+      transform: translateY(-4px);
+    }
+    .tier-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+
+    /* Tier accent colors */
+    .tier-card--first-step::before { background: #10B981; }
+    .tier-card--shield::before { background: #3B82F6; }
+    .tier-card--sentinel::before { background: #F59E0B; }
+    .tier-card--guardian::before { background: linear-gradient(90deg, #00D4AA, #00F5C4, #00D4AA); }
+
+    .tier-card--guardian {
+      border-color: rgba(0,212,170,.25);
+    }
+
+    .tier-card__badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 16px;
+      width: fit-content;
+    }
+    .tier-card--first-step .tier-card__badge { background: rgba(16,185,129,.15); color: #10B981; }
+    .tier-card--shield .tier-card__badge { background: rgba(59,130,246,.15); color: #3B82F6; }
+    .tier-card--sentinel .tier-card__badge { background: rgba(245,158,11,.15); color: #F59E0B; }
+    .tier-card--guardian .tier-card__badge { background: var(--accent-dim); color: var(--accent); }
+
+    .tier-card__name {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .tier-card__desc {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    .tier-card__price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .tier-card__price {
+      font-size: 48px;
+      font-weight: 900;
+      letter-spacing: -2px;
+    }
+    .tier-card__price sup {
+      font-size: 20px;
+      font-weight: 700;
+      position: relative;
+      top: -16px;
+    }
+    .tier-card__price-note {
+      color: var(--text-tertiary);
+      font-size: 13px;
+      margin-bottom: 24px;
+    }
+    .tier-card__divider {
+      border: none;
+      border-top: 1px solid var(--surface-border);
+      margin: 0 0 24px;
+    }
+    .tier-card__includes {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-tertiary);
+      margin-bottom: 16px;
+    }
+    .tier-card__features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 32px;
+      flex-grow: 1;
+    }
+    .tier-card__features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 7px 0;
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    .tier-card__features li svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+    .tier-card__features li .feat-new { color: var(--accent); }
+    .tier-card__features li .feat-inherited { color: var(--text-muted); }
+
+    .tier-card__cta {
+      display: block;
+      text-align: center;
+      padding: 14px 24px;
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      font-size: 14px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .tier-card--first-step .tier-card__cta {
+      background: rgba(16,185,129,.12);
+      color: #10B981;
+      border: 1px solid rgba(16,185,129,.25);
+    }
+    .tier-card--first-step .tier-card__cta:hover { background: rgba(16,185,129,.2); }
+
+    .tier-card--shield .tier-card__cta {
+      background: rgba(59,130,246,.12);
+      color: #3B82F6;
+      border: 1px solid rgba(59,130,246,.25);
+    }
+    .tier-card--shield .tier-card__cta:hover { background: rgba(59,130,246,.2); }
+
+    .tier-card--sentinel .tier-card__cta {
+      background: rgba(245,158,11,.12);
+      color: #F59E0B;
+      border: 1px solid rgba(245,158,11,.25);
+    }
+    .tier-card--sentinel .tier-card__cta:hover { background: rgba(245,158,11,.2); }
+
+    .tier-card--guardian .tier-card__cta {
+      background: var(--accent);
+      color: #000;
+      border: 1px solid var(--accent);
+    }
+    .tier-card--guardian .tier-card__cta:hover { background: var(--accent-bright); }
+
+    /* Inherited feature styling */
+    .feat-inherited-text {
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    /* How it works row */
+    .tiers-how {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .tiers-how__step {
+      text-align: center;
+      padding: 24px 16px;
+    }
+    .tiers-how__num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--accent-dim);
+      color: var(--accent);
+      font-weight: 800;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+    .tiers-how__step h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .tiers-how__step p {
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* Compare note */
+    .tiers-compare {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    /* Tier artwork image */
+    .tier-card__img {
+      width: 100%;
+      max-width: 240px;
+      height: auto;
+      border-radius: var(--radius-md);
+      margin: 0 auto 20px;
+      display: block;
+      opacity: 0.92;
+      transition: opacity 0.3s ease;
+    }
+    .tier-card:hover .tier-card__img { opacity: 1; }
+
+    @media (max-width: 768px) {
+      .tiers-grid { grid-template-columns: 1fr; max-width: 400px; }
+      .tier-card__price { font-size: 40px; }
+      .tier-card__img { max-width: 200px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════ NAVIGATION ═══════════════ -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo" aria-label="LockLoom home">
+      <img src="https://lockloom-llc.github.io/LockLoom/assets/ic_launcher-playstore-512.png" alt="LockLoom icon" width="36" height="36" />
+      <span>LockLoom</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html#features">Features</a></li>
+      <li><a href="index.html#distress">Distress&nbsp;System</a></li>
+      <li><a href="index.html#pricing">Pricing</a></li>
+      <li><a href="tiers.html" style="color:var(--text-primary)">Tiers</a></li>
+      <li><a href="languages.html">Languages</a></li>
+      <li><a href="index.html#docs">Docs</a></li>
+      <li><a href="index.html#faq">FAQ</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+    </ul>
+    <a href="https://play.google.com/store/search?q=lockloom&c=apps" class="nav__cta" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Get LockLoom
+    </a>
+    <button class="nav__burger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section style="padding: calc(80px + var(--section-pad)) 0 40px; text-align: center; background: var(--bg-void);">
+  <div class="container fade-in">
+    <p class="section-tag">Pricing</p>
+    <h1 style="font-size: clamp(32px, 5vw, 52px); font-weight: 900; letter-spacing: -1px; margin-bottom: 16px;">
+      Choose Your Level of Protection
+    </h1>
+    <p style="color: var(--text-secondary); font-size: 17px; max-width: 620px; margin: 0 auto 8px;">
+      Every tier is a <strong style="color:var(--text-primary);">one-time purchase</strong> with lifetime updates. No subscriptions. No accounts. No recurring fees.
+    </p>
+    <p style="color: var(--text-tertiary); font-size: 14px;">
+      Higher tiers include all features from lower tiers. Upgrade anytime from within the app.
+    </p>
+  </div>
+</section>
+
+
+<!-- ═══════════════ TIER CARDS ═══════════════ -->
+<section style="padding: 40px 0 var(--section-pad); background: var(--bg-void);">
+  <div class="container">
+
+    <div class="tiers-grid fade-in">
+
+      <!-- ── FIRST STEP ──────────────────────────── -->
+      <div class="tier-card tier-card--first-step">
+        <span class="tier-card__badge">Entry</span>
+        <h2 class="tier-card__name">First Step</h2>
+        <p class="tier-card__desc">Essential safety features for personal protection. Your entry point into LockLoom.</p>
+        <div class="tier-card__price-row">
+          <div class="tier-card__price"><sup>$</sup>0<sup>.99</sup></div>
+        </div>
+        <p class="tier-card__price-note">One-time app purchase on Google Play &bull; Rate-adjusted internationally</p>
+        <hr class="tier-card__divider" />
+        <p class="tier-card__includes">Features</p>
+        <ul class="tier-card__features">
+          <li>
+            <svg class="feat-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Distress PIN activation
+          </li>
+          <li>
+            <svg class="feat-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Emergency contacts (5 + 5)
+          </li>
+          <li>
+            <svg class="feat-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Movement tracking &amp; GPS location
+          </li>
+          <li>
+            <svg class="feat-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            AES-256-GCM encryption
+          </li>
+          <li>
+            <svg class="feat-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Gmail OAuth distress emails
+          </li>
+          <li>
+            <svg class="feat-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            SMS distress alerts
+          </li>
+          <li>
+            <svg class="feat-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Lifetime updates included
+          </li>
+        </ul>
+        <a href="https://play.google.com/store/search?q=lockloom&c=apps" class="tier-card__cta" target="_blank" rel="noopener">Get LockLoom — $0.99</a>
+      </div>
+
+      <!-- ── SHIELD ──────────────────────────── -->
+      <div class="tier-card tier-card--shield">
+        <img src="img/tier-shield.png" alt="Shield Mode" class="tier-card__img" width="240" height="240" loading="lazy" />
+        <span class="tier-card__badge">Protection</span>
+        <h2 class="tier-card__name">Shield</h2>
+        <p class="tier-card__desc">Invisibility and protection. Hide your safety tools from prying eyes.</p>
+        <div class="tier-card__price-row">
+          <div class="tier-card__price"><sup>$</sup>49</div>
+        </div>
+        <p class="tier-card__price-note">One-time in-app upgrade &bull; Includes all First Step features</p>
+        <hr class="tier-card__divider" />
+        <p class="tier-card__includes">Everything in First Step, plus</p>
+        <ul class="tier-card__features">
+          <li>
+            <svg class="feat-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            App cloaking (96 disguise icons)
+          </li>
+          <li>
+            <svg class="feat-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Network Cloak (WiFi, Bluetooth, NFC)
+          </li>
+          <li>
+            <svg class="feat-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Hidden encrypted workspace
+          </li>
+          <li>
+            <svg class="feat-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Per-app credential vault
+          </li>
+          <li>
+            <svg class="feat-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Boot Barricade (device lock on restart)
+          </li>
+          <li>
+            <svg class="feat-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            USB forensic protection
+          </li>
+          <li>
+            <svg class="feat-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Session Watchdog
+          </li>
+          <li>
+            <svg class="feat-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Legal Shield
+          </li>
+        </ul>
+        <a href="https://play.google.com/store/search?q=lockloom&c=apps" class="tier-card__cta" target="_blank" rel="noopener">Get LockLoom + Upgrade to Shield</a>
+      </div>
+
+      <!-- ── SENTINEL ──────────────────────────── -->
+      <div class="tier-card tier-card--sentinel">
+        <img src="img/tier-sentinel.png" alt="Sentinel Mode" class="tier-card__img" width="240" height="240" loading="lazy" />
+        <span class="tier-card__badge">Field-Grade</span>
+        <h2 class="tier-card__name">Sentinel</h2>
+        <p class="tier-card__desc">Field-grade security for high-risk situations. Advanced triggers and military-spec encryption.</p>
+        <div class="tier-card__price-row">
+          <div class="tier-card__price"><sup>$</sup>99</div>
+        </div>
+        <p class="tier-card__price-note">One-time in-app upgrade &bull; Includes all Shield features</p>
+        <hr class="tier-card__divider" />
+        <p class="tier-card__includes">Everything in Shield, plus</p>
+        <ul class="tier-card__features">
+          <li>
+            <svg class="feat-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Codeword triggers (6 actions)
+          </li>
+          <li>
+            <svg class="feat-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            NSI Encryption (FIPS 140-3 Level 1)
+          </li>
+          <li>
+            <svg class="feat-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Covert evidence capture
+          </li>
+          <li>
+            <svg class="feat-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Multi-channel distress dispatch
+          </li>
+          <li>
+            <svg class="feat-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Screen capture protection
+          </li>
+        </ul>
+        <a href="https://play.google.com/store/search?q=lockloom&c=apps" class="tier-card__cta" target="_blank" rel="noopener">Get LockLoom + Upgrade to Sentinel</a>
+      </div>
+
+      <!-- ── GUARDIAN ──────────────────────────── -->
+      <div class="tier-card tier-card--guardian">
+        <img src="img/tier-guardian.png" alt="Guardian Mode" class="tier-card__img" width="240" height="240" loading="lazy" />
+        <span class="tier-card__badge">Maximum</span>
+        <h2 class="tier-card__name">Guardian</h2>
+        <p class="tier-card__desc">Maximum protection with quantum-resistant cryptography and court-admissible evidence.</p>
+        <div class="tier-card__price-row">
+          <div class="tier-card__price"><sup>$</sup>119</div>
+        </div>
+        <p class="tier-card__price-note">One-time in-app upgrade &bull; Includes all Sentinel features</p>
+        <hr class="tier-card__divider" />
+        <p class="tier-card__includes">Everything in Sentinel, plus</p>
+        <ul class="tier-card__features">
+          <li>
+            <svg class="feat-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Secure file vault
+          </li>
+          <li>
+            <svg class="feat-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Quantum-resistant cryptography (ML-KEM-1024)
+          </li>
+          <li>
+            <svg class="feat-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Chain-of-custody evidence logs
+          </li>
+          <li>
+            <svg class="feat-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Secure export (court-admissible)
+          </li>
+        </ul>
+        <a href="https://play.google.com/store/search?q=lockloom&c=apps" class="tier-card__cta" target="_blank" rel="noopener">Get LockLoom + Upgrade to Guardian</a>
+      </div>
+
+    </div><!-- /tiers-grid -->
+
+
+    <!-- ── How Upgrades Work ──────────────────── -->
+    <div style="margin-top: 80px;" class="fade-in">
+      <div class="section-header" style="margin-bottom: 40px;">
+        <p class="section-tag">How It Works</p>
+        <h2 class="section-title" style="font-size: clamp(24px, 3vw, 32px);">Upgrade Anytime</h2>
+      </div>
+
+      <div class="tiers-how">
+        <div class="tiers-how__step">
+          <div class="tiers-how__num">1</div>
+          <h3>Buy LockLoom</h3>
+          <p>Purchase on Google Play for $0.99. You immediately get First Step tier with essential safety features.</p>
+        </div>
+        <div class="tiers-how__step">
+          <div class="tiers-how__num">2</div>
+          <h3>Use &amp; Evaluate</h3>
+          <p>Set up your distress PIN, add emergency contacts, and experience the core protection.</p>
+        </div>
+        <div class="tiers-how__step">
+          <div class="tiers-how__num">3</div>
+          <h3>Upgrade In-App</h3>
+          <p>When you need more, upgrade to Shield, Sentinel, or Guardian directly from the app. One tap, lifetime access.</p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ── Comparison Note ──────────────────── -->
+    <div style="margin-top: 64px;" class="fade-in">
+      <div class="tiers-compare">
+        <p style="color: var(--text-tertiary); font-size: 14px; line-height: 1.8;">
+          Competitors charge <strong style="color: var(--text-secondary);">$10+/month</strong> — that's $360 over 3 years for a single tier.<br />
+          LockLoom: <strong style="color: var(--accent);">$0.99 to start. All upgrades are one-time. No subscriptions ever.</strong>
+        </p>
+      </div>
+    </div>
+
+
+    <!-- ── Special Programs ──────────────────── -->
+    <div style="text-align: center; margin-top: 64px;" class="fade-in">
+      <p style="color: var(--text-tertiary); font-size: 14px; margin-bottom: 12px;">Special Programs</p>
+      <p style="color: var(--text-secondary); font-size: 15px; max-width: 600px; margin: 0 auto; line-height: 1.7;">
+        <strong style="color: var(--accent);">Free licenses</strong> available for domestic violence survivors (via partner orgs), journalists (CPJ, RSF, EFF referrals), and human rights activists. No verification required for DV survivors — trust-based, dignity-preserving.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <a href="index.html" class="nav__logo">
+          <img src="https://lockloom-llc.github.io/LockLoom/assets/ic_launcher-playstore-512.png" alt="LockLoom" width="32" height="32" />
+          <span>LockLoom</span>
+        </a>
+        <p>Security without surveillance. Multi-factor mobile protection with zero data collection and zero backend infrastructure.</p>
+      </div>
+
+      <div class="footer__col">
+        <h4>Product</h4>
+        <a href="index.html#features">Features</a>
+        <a href="index.html#pricing">Pricing</a>
+        <a href="tiers.html">Tiers</a>
+        <a href="index.html#distress">Distress System</a>
+        <a href="languages.html">Languages</a>
+        <a href="index.html#specs">Technical Specs</a>
+      </div>
+
+      <div class="footer__col">
+        <h4>Resources</h4>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="provisioning.html">QR Provisioning</a>
+        <a href="https://lockloom-llc.github.io/LockLoom/policies/lockloom-device-owner-policies.html" target="_blank" rel="noopener">Device Owner Policies</a>
+        <a href="https://github.com/LockLoom-LLC/LockLoom" target="_blank" rel="noopener">GitHub</a>
+      </div>
+
+      <div class="footer__col">
+        <h4>Programs</h4>
+        <a href="#">Survivor Support</a>
+        <a href="#">Journalist Program</a>
+        <a href="#">Bulk Licensing</a>
+        <a href="#">Contact Support</a>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>&copy; 2025-2026 LockLoom LLC. All rights reserved.</p>
+      <div>
+        <a href="privacy.html">Privacy</a> &nbsp;&bull;&nbsp;
+        <a href="#">Terms</a> &nbsp;&bull;&nbsp;
+        <a href="https://lockloom-llc.github.io/LockLoom/policies/lockloom-device-owner-policies.html" target="_blank" rel="noopener">Policies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
